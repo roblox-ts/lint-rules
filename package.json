@@ -1,20 +1,23 @@
 {
-    "name": "eslint-plugin-roblox-ts",
-    "version": "0.0.0",
-    "main": "index.js",
-    "devDependencies": {
-        "eslint": "^6.1.0"
-    },
-    "engines": {
-        "node": ">=0.10.0"
-    },
-    "scripts": {
-        "build": "tsc & node out"
-    },
-    "dependencies": {
-        "@types/node": "^12.7.2",
-        "@typescript-eslint/experimental-utils": "^2.0.0",
-        "tsutils": "^3.17.1",
-        "typescript": "^3.5.3"
-    }
+	"name": "eslint-plugin-roblox-ts",
+	"version": "0.0.1",
+	"main": "index.js",
+	"devDependencies": {
+		"eslint": "^6.1.0"
+	},
+	"engines": {
+		"node": ">=0.10.0"
+	},
+	"scripts": {
+		"build": "tsc & node out"
+	},
+	"dependencies": {
+		"@types/node": "^12.7.2",
+		"@typescript-eslint/experimental-utils": "^2.0.0",
+		"tsutils": "^3.17.1",
+		"typescript": "^3.5.3"
+	},
+	"files": [
+		"out"
+	]
 }
