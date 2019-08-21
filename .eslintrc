@@ -1,11 +1,6 @@
 {
 	"extends": ["plugin:@typescript-eslint/recommended", "prettier/@typescript-eslint", "plugin:prettier/recommended"],
 	"plugins": ["@typescript-eslint", "@typescript-eslint/eslint-plugin", "prettier"],
-	"env": {
-		"browser": true,
-		"jasmine": true,
-		"jest": true
-	},
 	"rules": {
 		"prettier/prettier": [
 			"error",
