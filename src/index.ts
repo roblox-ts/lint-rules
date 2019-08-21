@@ -79,11 +79,11 @@ export = {
 			},
 		}),
 
-		"ban-luatuple-checks": ESLintUtils.RuleCreator(name => name)<
+		"misleading-luatuple-checks": ESLintUtils.RuleCreator(name => name)<
 			[],
 			"bannedLuaTupleCheck" | "bannedImplicitTupleCheck"
 		>({
-			name: "ban-luatuple-checks",
+			name: "misleading-luatuple-checks",
 			meta: {
 				type: "problem",
 				docs: {
@@ -170,5 +170,13 @@ export = {
 				};
 			},
 		}),
+	},
+	configs: {
+		recommended: {
+			rules: {
+				"eslint-plugin-roblox-ts/ban-null": "error",
+				"eslint-plugin-roblox-ts/misleading-luatuple-checks": "warn",
+			},
+		},
 	},
 };
