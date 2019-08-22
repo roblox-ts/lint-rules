@@ -326,6 +326,7 @@ export = makePlugin({
 				"no-with": "error",
 				"no-debugger": "error",
 				"no-labels": "error",
+				"prefer-rest-params": "error",
 				eqeqeq: "error",
 			},
 		},
