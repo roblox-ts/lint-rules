@@ -291,18 +291,24 @@ export = makePlugin({
 			},
 			defaultOptions: [],
 			create(context) {
-				const sourceCode = context.getSourceCode();
+				function checkMethodDefinition(
+					node: TSESTree.ObjectExpression | TSESTree.ClassBody,
+					fields: Array<TSESTree.ClassElement> | Array<TSESTree.ObjectLiteralElementLike>,
+				) {
+					for (const prop of fields) {
+						if (prop.type === AST_NODE_TYPES.Property && (prop.kind === "get" || prop.kind === "set")) {
+							context.report({
+								node,
+								messageId: "getterSetterViolation",
+								fix: fix => fix.replaceTextRange([prop.range[0] + 3, prop.key.range[0]], ""),
+							});
+						}
+					}
+				}
+
 				return {
-					// context.report({
-					// 	node,
-					// 	messageId: "getterSetterViolation",
-					// });
-					// GetAccessor(node) {
-					// 	console.log("get", node);
-					// },
-					// Literal(node) {
-					// 	node;
-					// },
+					ObjectExpression: node => checkMethodDefinition(node, node.properties),
+					ClassBody: node => checkMethodDefinition(node, node.body),
 				};
 			},
 		}),
