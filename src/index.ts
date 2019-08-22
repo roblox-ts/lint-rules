@@ -208,6 +208,7 @@ export = {
 				"roblox-ts/no-for-in": "warn",
 				"no-void": "error",
 				"no-with": "error",
+				"no-debugger": "error",
 			},
 		},
 	},
