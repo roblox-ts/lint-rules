@@ -24,7 +24,7 @@ const makePlugin = (obj: {
 			if (ruleName.startsWith("roblox-ts/") && !ruleNames.has(ruleName.slice(10))) {
 				throw new Error(
 					`${ruleName} is not a valid rule defined in eslint-plugin-roblox-ts! Try one of the following: ` +
-						[...ruleNames].join(", ")
+						[...ruleNames].join(", "),
 				);
 			}
 		}
@@ -39,7 +39,7 @@ export = makePlugin({
 		"no-for-in": noForIn,
 		"no-delete": noDelete,
 		"no-regex": noRegex,
-		"no-getters-or-setters": noGettersOrSetters
+		"no-getters-or-setters": noGettersOrSetters,
 	},
 	configs: {
 		recommended: {
@@ -55,8 +55,8 @@ export = makePlugin({
 				"no-debugger": "error",
 				"no-labels": "error",
 				"prefer-rest-params": "error", // disables `arguments`
-				eqeqeq: "error"
-			}
-		}
-	}
+				eqeqeq: "error",
+			},
+		},
+	},
 });

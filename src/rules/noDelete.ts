@@ -8,12 +8,12 @@ export const noDelete = makeRule<[], "deleteViolation">({
 			description: "Disallows the delete operator",
 			category: "Possible Errors",
 			recommended: "error",
-			requiresTypeChecking: false
+			requiresTypeChecking: false,
 		},
 		schema: [],
 		messages: {
-			deleteViolation: "The delete operator is not supported. Please use a map instead and use map.delete()"
-		}
+			deleteViolation: "The delete operator is not supported. Please use a map instead and use map.delete()",
+		},
 	},
 	defaultOptions: [],
 	create(context) {
@@ -22,7 +22,7 @@ export const noDelete = makeRule<[], "deleteViolation">({
 				if (node.operator === "delete") {
 					context.report({ node, messageId: "deleteViolation" });
 				}
-			}
+			},
 		};
-	}
+	},
 });

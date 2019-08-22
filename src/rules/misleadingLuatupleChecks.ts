@@ -10,15 +10,15 @@ export const misleadingLuatupleChecks = makeRule<[], "bannedLuaTupleCheck" | "ba
 			description: "Bans LuaTuples boolean expressions",
 			category: "Possible Errors",
 			recommended: "error",
-			requiresTypeChecking: true
+			requiresTypeChecking: true,
 		},
 		schema: [],
 		messages: {
 			bannedLuaTupleCheck: "Unexpected LuaTuple in conditional expression. Add [0].",
 			bannedImplicitTupleCheck:
-				'Unexpected implicit truthy check of a Lua built-in method: A return value of 0 or "" would evaluate as false.'
+				'Unexpected implicit truthy check of a Lua built-in method: A return value of 0 or "" would evaluate as false.',
 		},
-		fixable: "code"
+		fixable: "code",
 	},
 	defaultOptions: [],
 	create(context) {
@@ -49,7 +49,7 @@ export const misleadingLuatupleChecks = makeRule<[], "bannedLuaTupleCheck" | "ba
 					return context.report({
 						node,
 						messageId: "bannedImplicitTupleCheck",
-						fix: fix => fix.insertTextAfter(node, " !== undefined")
+						fix: fix => fix.insertTextAfter(node, " !== undefined"),
 					});
 				}
 			}
@@ -58,7 +58,7 @@ export const misleadingLuatupleChecks = makeRule<[], "bannedLuaTupleCheck" | "ba
 				return context.report({
 					node,
 					messageId: "bannedLuaTupleCheck",
-					fix: fix => fix.insertTextAfter(node, "[0]")
+					fix: fix => fix.insertTextAfter(node, "[0]"),
 				});
 			}
 		}
@@ -80,7 +80,7 @@ export const misleadingLuatupleChecks = makeRule<[], "bannedLuaTupleCheck" | "ba
 				checkTruthy(node.left);
 				checkTruthy(node.right);
 			},
-			'UnaryExpression[operator="!"]': ({ argument }: TSESTree.UnaryExpression) => checkTruthy(argument)
+			'UnaryExpression[operator="!"]': ({ argument }: TSESTree.UnaryExpression) => checkTruthy(argument),
 		};
-	}
+	},
 });

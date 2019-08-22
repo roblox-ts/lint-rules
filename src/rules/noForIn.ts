@@ -8,14 +8,14 @@ export const noForIn = makeRule<[], "forInViolation">({
 			description: "Disallows iterating with a for-in loop",
 			category: "Possible Errors",
 			recommended: "error",
-			requiresTypeChecking: false
+			requiresTypeChecking: false,
 		},
 		messages: {
 			forInViolation:
-				"For-in loops are forbidden because it always types the iterator variable as `string`. Use for-of or array.forEach instead."
+				"For-in loops are forbidden because it always types the iterator variable as `string`. Use for-of or array.forEach instead.",
 		},
 		schema: [],
-		fixable: "code"
+		fixable: "code",
 	},
 	defaultOptions: [],
 	create(context) {
@@ -24,9 +24,9 @@ export const noForIn = makeRule<[], "forInViolation">({
 				context.report({
 					node,
 					messageId: "forInViolation",
-					fix: fix => fix.replaceTextRange([node.left.range[1], node.right.range[0]], " of ")
+					fix: fix => fix.replaceTextRange([node.left.range[1], node.right.range[0]], " of "),
 				});
-			}
+			},
 		};
-	}
+	},
 });

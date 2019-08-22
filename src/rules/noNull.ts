@@ -8,13 +8,13 @@ export const noNull = makeRule<[], "nullViolation">({
 			description: "Bans null from being used",
 			category: "Possible Errors",
 			recommended: "error",
-			requiresTypeChecking: false
+			requiresTypeChecking: false,
 		},
 		fixable: "code",
 		messages: {
-			nullViolation: "Don't use null. Use undefined instead"
+			nullViolation: "Don't use null. Use undefined instead",
 		},
-		schema: []
+		schema: [],
 	},
 	defaultOptions: [],
 	create(context) {
@@ -23,7 +23,7 @@ export const noNull = makeRule<[], "nullViolation">({
 				context.report({
 					node: node,
 					messageId: "nullViolation",
-					fix: fixer => fixer.replaceText(node, "undefined")
+					fix: fixer => fixer.replaceText(node, "undefined"),
 				});
 			},
 
@@ -32,9 +32,9 @@ export const noNull = makeRule<[], "nullViolation">({
 					context.report({
 						node: node,
 						messageId: "nullViolation",
-						fix: fixer => fixer.replaceText(node, "undefined")
+						fix: fixer => fixer.replaceText(node, "undefined"),
 					});
-			}
+			},
 		};
-	}
+	},
 });

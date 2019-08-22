@@ -8,12 +8,12 @@ export const noRegex = makeRule<[], "regexViolation">({
 			description: "Disallows the regex operator",
 			category: "Possible Errors",
 			recommended: "error",
-			requiresTypeChecking: false
+			requiresTypeChecking: false,
 		},
 		schema: [],
 		messages: {
-			regexViolation: "Regex literals are not supported."
-		}
+			regexViolation: "Regex literals are not supported.",
+		},
 	},
 	defaultOptions: [],
 	create(context) {
@@ -25,10 +25,10 @@ export const noRegex = makeRule<[], "regexViolation">({
 				if (token && token.type === "RegularExpression") {
 					context.report({
 						node,
-						messageId: "regexViolation"
+						messageId: "regexViolation",
 					});
 				}
-			}
+			},
 		};
-	}
+	},
 });
