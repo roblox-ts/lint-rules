@@ -47,10 +47,22 @@ const makePlugin = (obj: {
 	};
 	rules: { [s: string]: TSESLint.RuleModule<any, any, any> };
 }) => {
-	for (const ruleName in obj.rules) {
-		const url = obj.rules[ruleName].meta.docs.url;
+	const ruleNames = new Set<string>();
+	const { rules, configs } = obj;
+
+	for (const ruleName in rules) {
+		ruleNames.add(ruleName);
+		const url = rules[ruleName].meta.docs.url;
 		if (ruleName !== url) {
 			throw new Error(`Name mismatch in eslint-plugin-roblox-ts: ${ruleName} vs ${url}`);
+		}
+	}
+
+	for (const configName in configs) {
+		for (const ruleName in configs[configName].rules) {
+			if (ruleName.startsWith("roblox-ts/") && !ruleNames.has(ruleName.slice(10))) {
+				throw new Error(`${ruleName} is not a valid rule defined in eslint-plugin-roblox-ts!`);
+			}
 		}
 	}
 	return obj;
@@ -296,7 +308,7 @@ export = makePlugin({
 					fields: Array<TSESTree.ClassElement> | Array<TSESTree.ObjectLiteralElementLike>,
 				) {
 					for (const prop of fields) {
-						if (prop.type === AST_NODE_TYPES.Property && (prop.kind === "get" || prop.kind === "set")) {
+						if ("kind" in prop && (prop.kind === "get" || prop.kind === "set")) {
 							context.report({
 								node,
 								messageId: "getterSetterViolation",
@@ -326,7 +338,7 @@ export = makePlugin({
 				"no-with": "error",
 				"no-debugger": "error",
 				"no-labels": "error",
-				"prefer-rest-params": "error",
+				"prefer-rest-params": "error", // disables `arguments`
 				eqeqeq: "error",
 			},
 		},
