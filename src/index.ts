@@ -223,6 +223,39 @@ export = {
 				};
 			},
 		}),
+
+		"no-regex": makeRule<[], "regexViolation">({
+			name: "no-regex",
+			meta: {
+				type: "problem",
+				docs: {
+					description: "Disallows the regex operator",
+					category: "Possible Errors",
+					recommended: "error",
+					requiresTypeChecking: false,
+				},
+				schema: [],
+				messages: {
+					regexViolation: "Regex literals are not supported",
+				},
+			},
+			defaultOptions: [],
+			create(context) {
+				const sourceCode = context.getSourceCode();
+				return {
+					Literal(node) {
+						const token = sourceCode.getFirstToken(node);
+
+						if (token && token.type === "RegularExpression") {
+							context.report({
+								node,
+								messageId: "regexViolation",
+							});
+						}
+					},
+				};
+			},
+		}),
 	},
 	configs: {
 		recommended: {
@@ -231,6 +264,7 @@ export = {
 				"roblox-ts/misleading-luatuple-checks": "warn",
 				"roblox-ts/no-for-in": "error",
 				"roblox-ts/no-delete": "error",
+				"roblox-ts/no-regex": "error",
 				"no-void": "error",
 				"no-with": "error",
 				"no-debugger": "error",
