@@ -61,7 +61,10 @@ const makePlugin = (obj: {
 	for (const configName in configs) {
 		for (const ruleName in configs[configName].rules) {
 			if (ruleName.startsWith("roblox-ts/") && !ruleNames.has(ruleName.slice(10))) {
-				throw new Error(`${ruleName} is not a valid rule defined in eslint-plugin-roblox-ts!`);
+				throw new Error(
+					`${ruleName} is not a valid rule defined in eslint-plugin-roblox-ts! Try one of the following: ` +
+						[...ruleNames].join(", "),
+				);
 			}
 		}
 	}
