@@ -209,6 +209,7 @@ export = {
 				"no-void": "error",
 				"no-with": "error",
 				"no-debugger": "error",
+				eqeqeq: "error",
 			},
 		},
 	},
