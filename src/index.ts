@@ -39,9 +39,41 @@ function getConstrainedTypeAtLocation(checker: ts.TypeChecker, node: ts.Node): t
 	return constrained || nodeType;
 }
 
-export = {
+const makeRule = ESLintUtils.RuleCreator(name => name);
+/** We just use this for intellisense */
+const makePlugin = (obj: {
+	configs: {
+		[s: string]: { rules: { [a: string]: "error" | "warn" | "off" } };
+	};
+	rules: { [s: string]: TSESLint.RuleModule<any, any, any> };
+}) => {
+	const ruleNames = new Set<string>();
+	const { rules, configs } = obj;
+
+	for (const ruleName in rules) {
+		ruleNames.add(ruleName);
+		const url = rules[ruleName].meta.docs.url;
+		if (ruleName !== url) {
+			throw new Error(`Name mismatch in eslint-plugin-roblox-ts: ${ruleName} vs ${url}`);
+		}
+	}
+
+	for (const configName in configs) {
+		for (const ruleName in configs[configName].rules) {
+			if (ruleName.startsWith("roblox-ts/") && !ruleNames.has(ruleName.slice(10))) {
+				throw new Error(
+					`${ruleName} is not a valid rule defined in eslint-plugin-roblox-ts! Try one of the following: ` +
+						[...ruleNames].join(", "),
+				);
+			}
+		}
+	}
+	return obj;
+};
+
+export = makePlugin({
 	rules: {
-		"ban-null": ESLintUtils.RuleCreator(name => name)<[], "bannedNullMessage">({
+		"ban-null": makeRule<[], "bannedNullMessage">({
 			name: "ban-null",
 			meta: {
 				type: "problem",
@@ -49,6 +81,7 @@ export = {
 					description: "Bans null from being used",
 					category: "Possible Errors",
 					recommended: "error",
+					requiresTypeChecking: false,
 				},
 				fixable: "code",
 				messages: {
@@ -79,10 +112,7 @@ export = {
 			},
 		}),
 
-		"misleading-luatuple-checks": ESLintUtils.RuleCreator(name => name)<
-			[],
-			"bannedLuaTupleCheck" | "bannedImplicitTupleCheck"
-		>({
+		"misleading-luatuple-checks": makeRule<[], "bannedLuaTupleCheck" | "bannedImplicitTupleCheck">({
 			name: "misleading-luatuple-checks",
 			meta: {
 				type: "problem",
@@ -90,15 +120,9 @@ export = {
 					description: "Bans LuaTuples boolean expressions",
 					category: "Possible Errors",
 					recommended: "error",
-					//   requiresTypeChecking: true,
+					requiresTypeChecking: true,
 				},
-				schema: [
-					{
-						type: "object",
-						properties: {},
-						additionalProperties: false,
-					},
-				],
+				schema: [],
 				messages: {
 					bannedLuaTupleCheck: "Unexpected LuaTuple in conditional expression. Add [0].",
 					bannedImplicitTupleCheck:
@@ -170,13 +194,156 @@ export = {
 				};
 			},
 		}),
+
+		"no-for-in": makeRule<[], "forInViolation">({
+			name: "no-for-in",
+			meta: {
+				type: "problem",
+				docs: {
+					description: "Disallows iterating with a for-in loop",
+					category: "Possible Errors",
+					recommended: "error",
+					requiresTypeChecking: false,
+				},
+				messages: {
+					forInViolation:
+						"For-in loops are forbidden because it always types the iterator variable as `string`. Use for-of or array.forEach instead.",
+				},
+				schema: [],
+				fixable: "code",
+			},
+			defaultOptions: [],
+			create(context) {
+				return {
+					ForInStatement(node) {
+						context.report({
+							node,
+							messageId: "forInViolation",
+							fix: fix => fix.replaceTextRange([node.left.range[1], node.right.range[0]], " of "),
+						});
+					},
+				};
+			},
+		}),
+
+		"no-delete": makeRule<[], "deleteViolation">({
+			name: "no-delete",
+			meta: {
+				type: "problem",
+				docs: {
+					description: "Disallows the delete operator",
+					category: "Possible Errors",
+					recommended: "error",
+					requiresTypeChecking: false,
+				},
+				schema: [],
+				messages: {
+					deleteViolation:
+						"The delete operator is not supported. Please use a map instead and use map.delete()",
+				},
+			},
+			defaultOptions: [],
+			create(context) {
+				return {
+					UnaryExpression(node) {
+						if (node.operator === "delete") {
+							context.report({ node, messageId: "deleteViolation" });
+						}
+					},
+				};
+			},
+		}),
+
+		"no-regex": makeRule<[], "regexViolation">({
+			name: "no-regex",
+			meta: {
+				type: "problem",
+				docs: {
+					description: "Disallows the regex operator",
+					category: "Possible Errors",
+					recommended: "error",
+					requiresTypeChecking: false,
+				},
+				schema: [],
+				messages: {
+					regexViolation: "Regex literals are not supported.",
+				},
+			},
+			defaultOptions: [],
+			create(context) {
+				const sourceCode = context.getSourceCode();
+				return {
+					Literal(node) {
+						const token = sourceCode.getFirstToken(node);
+
+						if (token && token.type === "RegularExpression") {
+							context.report({
+								node,
+								messageId: "regexViolation",
+							});
+						}
+					},
+				};
+			},
+		}),
+
+		"no-getters-or-setters": makeRule<[], "getterSetterViolation">({
+			name: "no-getters-or-setters",
+			meta: {
+				type: "problem",
+				docs: {
+					description: "Disallows getters and setters",
+					category: "Possible Errors",
+					recommended: "error",
+					requiresTypeChecking: false,
+				},
+				schema: [],
+				messages: {
+					getterSetterViolation:
+						"Getters and Setters are not supported for performance reasons. Please use a normal method instead.",
+				},
+				fixable: "code",
+			},
+			defaultOptions: [],
+			create(context) {
+				function checkMethodDefinition(
+					node: TSESTree.ObjectExpression | TSESTree.ClassBody,
+					fields: Array<TSESTree.ClassElement> | Array<TSESTree.ObjectLiteralElementLike>,
+				) {
+					for (const prop of fields) {
+						if ("kind" in prop && (prop.kind === "get" || prop.kind === "set")) {
+							context.report({
+								node,
+								messageId: "getterSetterViolation",
+								fix: fix => fix.replaceTextRange([prop.range[0] + 3, prop.key.range[0]], ""),
+							});
+						}
+					}
+				}
+
+				return {
+					ObjectExpression: node => checkMethodDefinition(node, node.properties),
+					ClassBody: node => checkMethodDefinition(node, node.body),
+				};
+			},
+		}),
 	},
 	configs: {
 		recommended: {
 			rules: {
 				"roblox-ts/ban-null": "error",
-				"roblox-ts/misleading-luatuple-checks": "warn",
+				"roblox-ts/misleading-luatuple-checks": "error",
+				"roblox-ts/no-for-in": "error",
+				"roblox-ts/no-delete": "error",
+				"roblox-ts/no-regex": "error",
+				"roblox-ts/no-getters-or-setters": "error",
+				"no-void": "error",
+				"no-with": "error",
+				"no-debugger": "error",
+				"no-labels": "error",
+				"prefer-rest-params": "error", // disables `arguments`
+				eqeqeq: "error",
 			},
 		},
 	},
-};
+});
