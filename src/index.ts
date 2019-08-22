@@ -174,8 +174,8 @@ export = {
 	configs: {
 		recommended: {
 			rules: {
-				"eslint-plugin-roblox-ts/ban-null": "error",
-				"eslint-plugin-roblox-ts/misleading-luatuple-checks": "warn",
+				"roblox-ts/ban-null": "error",
+				"roblox-ts/misleading-luatuple-checks": "warn",
 			},
 		},
 	},
