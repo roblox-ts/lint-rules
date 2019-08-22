@@ -51,6 +51,7 @@ export = {
 					description: "Bans null from being used",
 					category: "Possible Errors",
 					recommended: "error",
+					requiresTypeChecking: false,
 				},
 				fixable: "code",
 				messages: {
@@ -89,15 +90,9 @@ export = {
 					description: "Bans LuaTuples boolean expressions",
 					category: "Possible Errors",
 					recommended: "error",
-					//   requiresTypeChecking: true,
+					requiresTypeChecking: true,
 				},
-				schema: [
-					{
-						type: "object",
-						properties: {},
-						additionalProperties: false,
-					},
-				],
+				schema: [],
 				messages: {
 					bannedLuaTupleCheck: "Unexpected LuaTuple in conditional expression. Add [0].",
 					bannedImplicitTupleCheck:
@@ -171,19 +166,20 @@ export = {
 		}),
 
 		"no-for-in": makeRule<[], "forInViolation">({
-			name: "no-for-in-array",
+			name: "no-for-in",
 			meta: {
+				type: "problem",
 				docs: {
-					description: "Disallow iterating with a for-in loop",
+					description: "Disallows iterating with a for-in loop",
 					category: "Possible Errors",
 					recommended: "error",
 					requiresTypeChecking: false,
 				},
 				messages: {
-					forInViolation: "For-in loops over arrays are forbidden. Use for-of or array.forEach instead.",
+					forInViolation:
+						"For-in loops are forbidden because it always types the iterator variable as `string`. Use for-of or array.forEach instead.",
 				},
 				schema: [],
-				type: "problem",
 				fixable: "code",
 			},
 			defaultOptions: [],
@@ -199,13 +195,42 @@ export = {
 				};
 			},
 		}),
+
+		"no-delete": makeRule<[], "deleteViolation">({
+			name: "no-delete",
+			meta: {
+				type: "problem",
+				docs: {
+					description: "Disallows the delete operator",
+					category: "Possible Errors",
+					recommended: "error",
+					requiresTypeChecking: false,
+				},
+				schema: [],
+				messages: {
+					deleteViolation:
+						"The delete operator is not supported. Please use a map instead and use map.delete()",
+				},
+			},
+			defaultOptions: [],
+			create(context) {
+				return {
+					UnaryExpression(node) {
+						if (node.operator === "delete") {
+							context.report({ node, messageId: "deleteViolation" });
+						}
+					},
+				};
+			},
+		}),
 	},
 	configs: {
 		recommended: {
 			rules: {
 				"roblox-ts/ban-null": "error",
 				"roblox-ts/misleading-luatuple-checks": "warn",
-				"roblox-ts/no-for-in": "warn",
+				"roblox-ts/no-for-in": "error",
+				"roblox-ts/no-delete": "error",
 				"no-void": "error",
 				"no-with": "error",
 				"no-debugger": "error",
