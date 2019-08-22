@@ -236,7 +236,7 @@ export = {
 				},
 				schema: [],
 				messages: {
-					regexViolation: "Regex literals are not supported",
+					regexViolation: "Regex literals are not supported.",
 				},
 			},
 			defaultOptions: [],
@@ -260,8 +260,8 @@ export = {
 	configs: {
 		recommended: {
 			rules: {
-				"roblox-ts/ban-null": "error",
 				"roblox-ts/misleading-luatuple-checks": "warn",
+				"roblox-ts/ban-null": "error",
 				"roblox-ts/no-for-in": "error",
 				"roblox-ts/no-delete": "error",
 				"roblox-ts/no-regex": "error",
