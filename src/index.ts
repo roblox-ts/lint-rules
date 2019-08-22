@@ -206,6 +206,7 @@ export = {
 				"roblox-ts/ban-null": "error",
 				"roblox-ts/misleading-luatuple-checks": "warn",
 				"roblox-ts/no-for-in": "warn",
+				"no-void": "error",
 			},
 		},
 	},
