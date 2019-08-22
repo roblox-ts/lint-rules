@@ -315,7 +315,7 @@ export = makePlugin({
 				"roblox-ts/no-for-in": "error",
 				"roblox-ts/no-delete": "error",
 				"roblox-ts/no-regex": "error",
-				"no-getters-or-setters": "error",
+				"roblox-ts/no-getters-or-setters": "error",
 				"no-void": "error",
 				"no-with": "error",
 				"no-debugger": "error",
