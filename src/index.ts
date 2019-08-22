@@ -39,9 +39,11 @@ function getConstrainedTypeAtLocation(checker: ts.TypeChecker, node: ts.Node): t
 	return constrained || nodeType;
 }
 
+const makeRule = ESLintUtils.RuleCreator(name => name);
+
 export = {
 	rules: {
-		"ban-null": ESLintUtils.RuleCreator(name => name)<[], "bannedNullMessage">({
+		"ban-null": makeRule<[], "bannedNullMessage">({
 			name: "ban-null",
 			meta: {
 				type: "problem",
@@ -79,10 +81,7 @@ export = {
 			},
 		}),
 
-		"misleading-luatuple-checks": ESLintUtils.RuleCreator(name => name)<
-			[],
-			"bannedLuaTupleCheck" | "bannedImplicitTupleCheck"
-		>({
+		"misleading-luatuple-checks": makeRule<[], "bannedLuaTupleCheck" | "bannedImplicitTupleCheck">({
 			name: "misleading-luatuple-checks",
 			meta: {
 				type: "problem",
@@ -170,12 +169,43 @@ export = {
 				};
 			},
 		}),
+
+		"no-for-in": makeRule<[], "forInViolation">({
+			name: "no-for-in-array",
+			meta: {
+				docs: {
+					description: "Disallow iterating with a for-in loop",
+					category: "Possible Errors",
+					recommended: "error",
+					requiresTypeChecking: false,
+				},
+				messages: {
+					forInViolation: "For-in loops over arrays are forbidden. Use for-of or array.forEach instead.",
+				},
+				schema: [],
+				type: "problem",
+				fixable: "code",
+			},
+			defaultOptions: [],
+			create(context) {
+				return {
+					ForInStatement(node) {
+						context.report({
+							node,
+							messageId: "forInViolation",
+							fix: fix => fix.replaceTextRange([node.left.range[1], node.right.range[0]], " of "),
+						});
+					},
+				};
+			},
+		}),
 	},
 	configs: {
 		recommended: {
 			rules: {
 				"roblox-ts/ban-null": "error",
 				"roblox-ts/misleading-luatuple-checks": "warn",
+				"roblox-ts/no-for-in": "warn",
 			},
 		},
 	},
