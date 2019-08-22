@@ -1,6 +1,5 @@
 import { TSESLint } from "@typescript-eslint/experimental-utils";
-import { misleadingLuatupleChecks, noDelete, noGettersOrSetters, noNull, noRegex } from "./rules";
-import { noForIn } from "./rules/noForIn";
+import { misleadingLuatupleChecks, noDelete, noForIn, noGettersOrSetters, noNull, noRegex } from "./rules";
 
 /** We just use this for intellisense */
 const makePlugin = (obj: {
