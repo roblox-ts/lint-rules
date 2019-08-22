@@ -45,7 +45,7 @@ export = makePlugin({
 	configs: {
 		recommended: {
 			rules: {
-				"roblox-ts/ban-null": "error",
+				"roblox-ts/no-null": "error",
 				"roblox-ts/misleading-luatuple-checks": "error",
 				"roblox-ts/no-for-in": "error",
 				"roblox-ts/no-delete": "error",
