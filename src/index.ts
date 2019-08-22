@@ -40,8 +40,23 @@ function getConstrainedTypeAtLocation(checker: ts.TypeChecker, node: ts.Node): t
 }
 
 const makeRule = ESLintUtils.RuleCreator(name => name);
+/** We just use this for intellisense */
+const makePlugin = (obj: {
+	configs: {
+		[s: string]: { rules: { [a: string]: "error" | "warn" | "off" } };
+	};
+	rules: { [s: string]: TSESLint.RuleModule<any, any, any> };
+}) => {
+	for (const ruleName in obj.rules) {
+		const url = obj.rules[ruleName].meta.docs.url;
+		if (ruleName !== url) {
+			throw new Error(`Name mismatch in eslint-plugin-roblox-ts: ${ruleName} vs ${url}`);
+		}
+	}
+	return obj;
+};
 
-export = {
+export = makePlugin({
 	rules: {
 		"ban-null": makeRule<[], "bannedNullMessage">({
 			name: "ban-null",
@@ -256,15 +271,51 @@ export = {
 				};
 			},
 		}),
+
+		"no-getters-or-setters": makeRule<[], "getterSetterViolation">({
+			name: "no-getters-or-setters",
+			meta: {
+				type: "problem",
+				docs: {
+					description: "Disallows getters and setters",
+					category: "Possible Errors",
+					recommended: "error",
+					requiresTypeChecking: false,
+				},
+				schema: [],
+				messages: {
+					getterSetterViolation:
+						"Getters and Setters are not supported for performance reasons. Please use a normal method instead.",
+				},
+				fixable: "code",
+			},
+			defaultOptions: [],
+			create(context) {
+				const sourceCode = context.getSourceCode();
+				return {
+					// context.report({
+					// 	node,
+					// 	messageId: "getterSetterViolation",
+					// });
+					// GetAccessor(node) {
+					// 	console.log("get", node);
+					// },
+					// Literal(node) {
+					// 	node;
+					// },
+				};
+			},
+		}),
 	},
 	configs: {
 		recommended: {
 			rules: {
-				"roblox-ts/misleading-luatuple-checks": "warn",
 				"roblox-ts/ban-null": "error",
+				"roblox-ts/misleading-luatuple-checks": "error",
 				"roblox-ts/no-for-in": "error",
 				"roblox-ts/no-delete": "error",
 				"roblox-ts/no-regex": "error",
+				"no-getters-or-setters": "error",
 				"no-void": "error",
 				"no-with": "error",
 				"no-debugger": "error",
@@ -273,4 +324,4 @@ export = {
 			},
 		},
 	},
-};
+});
