@@ -13,7 +13,7 @@ export const noValueTypeOf = makeRule<[], "typeofValueViolation">({
 		schema: [],
 		messages: {
 			typeofValueViolation:
-				"The typeof operator is not supported for values. Please use `typeIs(value, typeName)` instead.",
+				"'typeof' operator is not supported! Use `typeIs(value, type)` or `typeOf(value)` instead.",
 		},
 	},
 	defaultOptions: [],
