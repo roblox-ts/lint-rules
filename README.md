@@ -57,7 +57,7 @@ Make a file named `.eslintrc` and place this in the contents:
         "plugin:@typescript-eslint/recommended",
         "prettier/@typescript-eslint",
         "plugin:prettier/recommended",
-        "plugin:eslint-plugin-roblox-ts/recommended"
+        "plugin:roblox-ts/recommended"
     ],
     "rules": {
         "prettier/prettier": [
