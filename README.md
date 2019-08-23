@@ -48,7 +48,7 @@ Make a file named `.eslintrc` and place this in the contents:
         "project": "./tsconfig.json"
     },
     "plugins": [
-        "eslint-plugin-roblox-ts",
+        "roblox-ts",
         "@typescript-eslint",
         "@typescript-eslint/eslint-plugin",
         "prettier"
