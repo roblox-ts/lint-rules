@@ -94,7 +94,7 @@ Make a file named `.eslintrc` and place this in the contents:
 
 Run the following command:
 
-`npm i -D eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-config-prettier eslint-plugin-prettier prettier eslint-plugin-roblox-ts`
+`npm i -D eslint @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint-config-prettier eslint-plugin-prettier eslint-plugin-roblox-ts`
 
 <!-- For roact development: npm i -D eslint-config-react -->
 
