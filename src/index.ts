@@ -1,5 +1,13 @@
 import { TSESLint } from "@typescript-eslint/experimental-utils";
-import { misleadingLuatupleChecks, noDelete, noForIn, noGettersOrSetters, noNull, noRegex } from "./rules";
+import {
+	misleadingLuatupleChecks,
+	noDelete,
+	noForIn,
+	noGettersOrSetters,
+	noNull,
+	noRegex,
+	noValueTypeOf,
+} from "./rules";
 
 /** We just use this for intellisense */
 const makePlugin = (obj: {
@@ -34,29 +42,32 @@ const makePlugin = (obj: {
 
 export = makePlugin({
 	rules: {
-		"no-null": noNull,
 		"misleading-luatuple-checks": misleadingLuatupleChecks,
-		"no-for-in": noForIn,
 		"no-delete": noDelete,
-		"no-regex": noRegex,
+		"no-for-in": noForIn,
 		"no-getters-or-setters": noGettersOrSetters,
+		"no-null": noNull,
+		"no-regex": noRegex,
+		"no-value-typeof": noValueTypeOf,
 	},
 	configs: {
 		recommended: {
 			rules: {
-				"roblox-ts/no-null": "error",
 				"roblox-ts/misleading-luatuple-checks": "error",
-				"roblox-ts/no-for-in": "error",
 				"roblox-ts/no-delete": "error",
-				"roblox-ts/no-regex": "error",
+				"roblox-ts/no-for-in": "error",
 				"roblox-ts/no-getters-or-setters": "error",
-				"no-void": "error",
-				"no-with": "error",
+				"roblox-ts/no-null": "error",
+				"roblox-ts/no-regex": "error",
+				"roblox-ts/no-value-typeof": "error",
+
 				"no-debugger": "error",
 				"no-labels": "error",
+				"no-var": "error",
+				"no-void": "error",
+				"no-with": "error",
 				"prefer-rest-params": "error", // disables `arguments`
 				eqeqeq: "error",
-				"no-var": "error",
 			},
 		},
 	},

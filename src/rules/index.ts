@@ -4,3 +4,4 @@ export * from "./noForIn";
 export * from "./noGettersOrSetters";
 export * from "./noNull";
 export * from "./noRegex";
+export * from "./noValueTypeOf";
