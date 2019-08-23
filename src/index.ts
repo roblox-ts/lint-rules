@@ -6,7 +6,7 @@ const makePlugin = (obj: {
 	configs: {
 		[s: string]: { rules: { [a: string]: "error" | "warn" | "off" } };
 	};
-	rules: { [s: string]: TSESLint.RuleModule<string, readonly unknown[]> };
+	rules: { [s: string]: TSESLint.RuleModule<string, ReadonlyArray<unknown>> };
 }) => {
 	const ruleNames = new Set<string>();
 	const { rules, configs } = obj;
