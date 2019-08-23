@@ -82,7 +82,6 @@ Make a file named `.eslintrc` and place this in the contents:
         "@typescript-eslint/explicit-function-return-type": "off",
         "@typescript-eslint/no-namespace": "off",
         "@typescript-eslint/no-non-null-assertion": "off",
-        "@typescript-eslint/no-for-in-array": "error",
         "@typescript-eslint/no-empty-function": "warn",
         "prefer-const": "warn",
         "no-undef-init": "error"
