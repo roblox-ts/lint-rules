@@ -14,7 +14,8 @@ const makePlugin = (obj: {
 	configs: {
 		[s: string]: { rules: { [a: string]: "error" | "warn" | "off" } };
 	};
-	rules: { [s: string]: TSESLint.RuleModule<string, ReadonlyArray<unknown>> };
+	// eslint-disable-next-line @typescript-eslint/no-explicit-any
+	rules: { [s: string]: TSESLint.RuleModule<any, any, any> };
 }) => {
 	const ruleNames = new Set<string>();
 	const { rules, configs } = obj;
