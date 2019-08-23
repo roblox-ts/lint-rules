@@ -56,6 +56,7 @@ export = makePlugin({
 				"no-labels": "error",
 				"prefer-rest-params": "error", // disables `arguments`
 				eqeqeq: "error",
+				"no-var": "error",
 			},
 		},
 	},
