@@ -35,7 +35,7 @@ Make sure these settings are in your settings file (`Ctrl + ,` to open the setti
 ```
 
 ## Step 3: Setup the eslint config file
-Make a file named `.eslintrc` and place this in the contents:
+Make a file named `.eslintrc` and place this in the contents. If you have a pre-existing `.prettierrc` file, you can move your rules into "prettier/prettier" (and delete `.prettierrc`). Either way, you can change your formatting preferences by editing the rules in "prettier/prettier".
 
 ```json
 {
@@ -61,7 +61,7 @@ Make a file named `.eslintrc` and place this in the contents:
     ],
     "rules": {
         "prettier/prettier": [
-            "error",
+            "warn",
             {
                 "semi": true,
                 "trailingComma": "all",
