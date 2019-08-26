@@ -15,7 +15,7 @@ export type RequiredParserServices = { [k in keyof ParserServices]: Exclude<Pars
 /**
  * Try to retrieve typescript parser service from context
  */
-export function getParserServices<TMessageIds extends string, TOptions extends unknown[]>(
+export function getParserServices<TMessageIds extends string, TOptions extends Array<unknown>>(
 	context: TSESLint.RuleContext<TMessageIds, TOptions>,
 ): RequiredParserServices {
 	if (!context.parserServices || !context.parserServices.program || !context.parserServices.esTreeNodeToTSNodeMap) {
