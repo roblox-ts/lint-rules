@@ -1,5 +1,8 @@
 # lint-rules
 
+![lint rules demo](https://user-images.githubusercontent.com/15217173/64753460-ed490e80-d4e8-11e9-9af9-06fb1a0aceae.gif)
+
+
 What follows is an incomplete guide on how to get started using typescript-eslint with eslint-plugin-roblox-ts and prettier. We eventually plan to make a better guide and automate a number of these steps through `rbxtsc` command line options. But, for now, here is how to use these lint rules with VSCode.
 
 ## Step 1: Install the VSCode plugins
