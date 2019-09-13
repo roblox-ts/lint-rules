@@ -9,10 +9,9 @@ const opTypes = new Map([
 	["/", "div"] as const,
 ]) as ReadonlyMap<string, string>;
 
-export const noObjectMath = makeRule<
-	[],
-	"addViolation" | "subViolation" | "mulViolation" | "divViolation" | "otherViolation"
->({
+type ViolationType = "addViolation" | "subViolation" | "mulViolation" | "divViolation" | "otherViolation";
+
+export const noObjectMath = makeRule<[], ViolationType>({
 	name: "no-object-math",
 	meta: {
 		type: "problem",
@@ -50,7 +49,7 @@ export const noObjectMath = makeRule<
 					if (oper) {
 						return context.report({
 							node,
-							messageId: `${oper}Violation` as "addViolation",
+							messageId: `${oper}Violation` as ViolationType,
 							fix: fix => [
 								fix.replaceTextRange([left.range[1], right.range[0]], `.${oper}(`),
 								fix.insertTextAfter(right, ")"),
