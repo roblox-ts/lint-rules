@@ -51,11 +51,10 @@ export const noObjectMath = makeRule<
 						return context.report({
 							node,
 							messageId: `${oper}Violation` as "addViolation",
-							fix: fix =>
-								fix.replaceTextRange(
-									[left.range[1], right.range[1]],
-									`.${oper}(${sourceCode.getText(right)})`,
-								),
+							fix: fix => [
+								fix.replaceTextRange([left.range[1], right.range[0]], `.${oper}(`),
+								fix.insertTextAfter(right, ")"),
+							],
 						});
 					} else {
 						return context.report({
