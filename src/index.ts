@@ -7,6 +7,7 @@ import {
 	noNull,
 	noRegex,
 	noValueTypeOf,
+	noObjectMath,
 } from "./rules";
 
 /** We just use this for intellisense */
@@ -50,6 +51,7 @@ export = makePlugin({
 		"no-null": noNull,
 		"no-regex": noRegex,
 		"no-value-typeof": noValueTypeOf,
+		"no-object-math": noObjectMath,
 	},
 	configs: {
 		recommended: {
@@ -61,6 +63,7 @@ export = makePlugin({
 				"roblox-ts/no-null": "error",
 				"roblox-ts/no-regex": "error",
 				"roblox-ts/no-value-typeof": "error",
+				"roblox-ts/no-object-math": "error",
 
 				"no-debugger": "error",
 				"no-labels": "error",
@@ -69,6 +72,7 @@ export = makePlugin({
 				"no-with": "error",
 				"prefer-rest-params": "error", // disables `arguments`
 				eqeqeq: "error",
+				"no-sparse-arrays": "warn",
 			},
 		},
 	},
