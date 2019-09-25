@@ -34,6 +34,8 @@ export const noRbxPostFixNew = makeRule<[], ViolationType>({
 		const service = getParserServices(context);
 		const checker = service.program.getTypeChecker();
 
+		// TODO: implement
+
 		return {};
 	},
 });
