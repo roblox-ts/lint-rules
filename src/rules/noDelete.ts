@@ -1,7 +1,8 @@
 import { makeRule } from "../util";
 
+export const noDeleteName = "no-delete";
 export const noDelete = makeRule<[], "deleteViolation">({
-	name: "no-delete",
+	name: noDeleteName,
 	meta: {
 		type: "problem",
 		docs: {

@@ -1,5 +1,6 @@
 import { makeRule } from "../util";
 
+export const noRegexName = "no-regex";
 export const noRegex = makeRule<[], "regexViolation">({
 	name: "no-regex",
 	meta: {

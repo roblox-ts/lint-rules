@@ -1,13 +1,6 @@
 import { TSESLint } from "@typescript-eslint/experimental-utils";
-import {
-	misleadingLuatupleChecks,
-	noDelete,
-	noForIn,
-	noGettersOrSetters,
-	noNull,
-	noRegex,
-	noValueTypeOf,
-} from "./rules";
+import { makeRule, robloxTSSettings } from "./util";
+import * as ruleImports from "./rules";
 
 /** We just use this for intellisense */
 const makePlugin = (obj: {
@@ -41,27 +34,34 @@ const makePlugin = (obj: {
 	return obj;
 };
 
+function getRules() {
+	const rules: { [K: string]: ReturnType<typeof makeRule> } = {};
+	for (const [i, ruleName] of Object.entries(ruleImports).filter(t => t[0].endsWith("Name")) as Array<
+		[string, string]
+	>) {
+		rules[ruleName as string] = ruleImports[i.slice(0, -4) as keyof typeof ruleImports] as ReturnType<
+			typeof makeRule
+		>;
+	}
+	return rules;
+}
+
 export = makePlugin({
-	rules: {
-		"misleading-luatuple-checks": misleadingLuatupleChecks,
-		"no-delete": noDelete,
-		"no-for-in": noForIn,
-		"no-getters-or-setters": noGettersOrSetters,
-		"no-null": noNull,
-		"no-regex": noRegex,
-		"no-value-typeof": noValueTypeOf,
-	},
+	rules: getRules(),
 	configs: {
 		recommended: {
 			rules: {
-				"roblox-ts/misleading-luatuple-checks": "error",
-				"roblox-ts/no-delete": "error",
-				"roblox-ts/no-for-in": "error",
-				"roblox-ts/no-getters-or-setters": "error",
-				"roblox-ts/no-null": "error",
-				"roblox-ts/no-regex": "error",
-				"roblox-ts/no-value-typeof": "error",
-
+				...robloxTSSettings({
+					"misleading-luatuple-checks": "error",
+					"no-delete": "error",
+					"no-for-in": "error",
+					"no-getters-or-setters": "error",
+					"no-null": "error",
+					"no-regex": "error",
+					"no-value-typeof": "error",
+					"no-object-math": "error",
+					"no-rbx-postfix-new": "error",
+				}),
 				"no-debugger": "error",
 				"no-labels": "error",
 				"no-var": "error",
@@ -69,6 +69,7 @@ export = makePlugin({
 				"no-with": "error",
 				"prefer-rest-params": "error", // disables `arguments`
 				eqeqeq: "error",
+				"no-sparse-arrays": "warn",
 			},
 		},
 	},
