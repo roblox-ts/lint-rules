@@ -1,7 +1,25 @@
 import { ESLintUtils, ParserServices, TSESLint, TSESTree } from "@typescript-eslint/experimental-utils";
 import ts from "typescript";
 
-export const makeRule = ESLintUtils.RuleCreator(name => name);
+export const makeRule = ESLintUtils.RuleCreator(name => {
+	return name;
+});
+
+type ExtractStringMembers<T> = Extract<T[keyof T], string>;
+
+export const robloxTSSettings = (
+	o: { [K in ExtractStringMembers<typeof import("./rules")>]: "error" | "warn" | "off" },
+) => {
+	const settings: {
+		[K: string]: "error" | "warn" | "off";
+	} = {};
+
+	for (const [name, setting] of Object.entries(o)) {
+		settings[`roblox-ts/${name}`] = setting;
+	}
+
+	return settings;
+};
 
 export type ExpressionWithTest =
 	| TSESTree.ConditionalExpression
@@ -10,15 +28,16 @@ export type ExpressionWithTest =
 	| TSESTree.IfStatement
 	| TSESTree.WhileStatement;
 
-export type RequiredParserServices = { [k in keyof ParserServices]: Exclude<ParserServices[k], undefined> };
+export type RequiredParserServices = { [K in keyof ParserServices]: Exclude<ParserServices[K], undefined> };
 
 /**
- * Try to retrieve typescript parser service from context
+ * Try to retrieve typescript parser service from context.
  */
 export function getParserServices<TMessageIds extends string, TOptions extends Array<unknown>>(
 	context: TSESLint.RuleContext<TMessageIds, TOptions>,
 ): RequiredParserServices {
-	if (!context.parserServices || !context.parserServices.program || !context.parserServices.esTreeNodeToTSNodeMap) {
+	const { parserServices } = context;
+	if (!parserServices || !parserServices.program || !parserServices.esTreeNodeToTSNodeMap) {
 		/**
 		 * The user needs to have configured "project" in their parserOptions
 		 * for @typescript-eslint/parser
@@ -27,7 +46,7 @@ export function getParserServices<TMessageIds extends string, TOptions extends A
 			'You have used a rule which requires parserServices to be generated. You must therefore provide a value for the "parserOptions.project" property for @typescript-eslint/parser.',
 		);
 	}
-	return context.parserServices as RequiredParserServices;
+	return parserServices as RequiredParserServices;
 }
 
 /**
@@ -35,7 +54,5 @@ export function getParserServices<TMessageIds extends string, TOptions extends A
  */
 export function getConstrainedTypeAtLocation(checker: ts.TypeChecker, node: ts.Node): ts.Type {
 	const nodeType = checker.getTypeAtLocation(node);
-	const constrained = checker.getBaseConstraintOfType(nodeType);
-
-	return constrained || nodeType;
+	return checker.getBaseConstraintOfType(nodeType) || nodeType;
 }

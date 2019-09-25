@@ -1,7 +1,8 @@
 import { makeRule } from "../util";
 
+export const noNullName = "no-null";
 export const noNull = makeRule<[], "nullViolation">({
-	name: "no-null",
+	name: noNullName,
 	meta: {
 		type: "problem",
 		docs: {

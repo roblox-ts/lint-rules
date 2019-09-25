@@ -2,8 +2,9 @@ import { AST_NODE_TYPES, TSESTree } from "@typescript-eslint/experimental-utils"
 import ts from "typescript";
 import { ExpressionWithTest, getConstrainedTypeAtLocation, getParserServices, makeRule } from "../util";
 
+export const misleadingLuatupleChecksName = "misleading-luatuple-checks";
 export const misleadingLuatupleChecks = makeRule<[], "bannedLuaTupleCheck" | "bannedImplicitTupleCheck">({
-	name: "misleading-luatuple-checks",
+	name: misleadingLuatupleChecksName,
 	meta: {
 		type: "problem",
 		docs: {

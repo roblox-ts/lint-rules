@@ -1,5 +1,6 @@
 import { makeRule } from "../util";
 
+export const noValueTypeOfName = "no-value-typeof";
 export const noValueTypeOf = makeRule<[], "typeofValueViolation">({
 	name: "no-value-typeof",
 	meta: {

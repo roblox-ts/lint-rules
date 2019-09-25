@@ -1,7 +1,7 @@
 import { makeRule, getParserServices, getConstrainedTypeAtLocation } from "../util";
 import ts from "typescript";
 
-const dataTypes = ["CFrame", "UDim", "UDim2", "Vector2", "Vector2int16", "Vector3", "Vector3int16"] as const;
+const dataTypes = ["CFrame", "UDim", "UDim2", "Vector2", "Vector2int16", "Vector3", "Vector3int16"];
 const opTypes = new Map([
 	["+", "add"] as const,
 	["-", "sub"] as const,
@@ -11,8 +11,9 @@ const opTypes = new Map([
 
 type ViolationType = "addViolation" | "subViolation" | "mulViolation" | "divViolation" | "otherViolation";
 
+export const noObjectMathName = "no-object-math";
 export const noObjectMath = makeRule<[], ViolationType>({
-	name: "no-object-math",
+	name: noObjectMathName,
 	meta: {
 		type: "problem",
 		docs: {

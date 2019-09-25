@@ -1,7 +1,8 @@
 import { makeRule } from "../util";
 
+export const noForInName = "no-for-in";
 export const noForIn = makeRule<[], "forInViolation">({
-	name: "no-for-in",
+	name: noForInName,
 	meta: {
 		type: "problem",
 		docs: {
