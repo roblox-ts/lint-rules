@@ -52,7 +52,7 @@ export = makePlugin({
 		recommended: {
 			rules: {
 				...robloxTSSettings({
-					"misleading-luatuple-checks": "error",
+					"misleading-luatuple-checks": "warn",
 					"no-delete": "error",
 					"no-for-in": "error",
 					"no-getters-or-setters": "error",

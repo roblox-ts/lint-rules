@@ -21,24 +21,23 @@ export const noGettersOrSetters = makeRule<[], "getterSetterViolation">({
 	},
 	defaultOptions: [],
 	create(context) {
-		function checkMethodDefinition(
-			node: TSESTree.ObjectExpression | TSESTree.ClassBody,
+		const checkMethodDefinition = (
 			fields: Array<TSESTree.ClassElement> | Array<TSESTree.ObjectLiteralElementLike>,
-		) {
-			for (const prop of fields) {
-				if ("kind" in prop && (prop.kind === "get" || prop.kind === "set")) {
+		) => {
+			for (const node of fields) {
+				if ("kind" in node && (node.kind === "get" || node.kind === "set")) {
 					context.report({
 						node,
 						messageId: "getterSetterViolation",
-						fix: fix => fix.replaceTextRange([prop.range[0] + 3, prop.key.range[0]], ""),
+						fix: fix => fix.replaceTextRange([node.key.range[0] - 1, node.key.range[0]], ""),
 					});
 				}
 			}
-		}
+		};
 
 		return {
-			ObjectExpression: node => checkMethodDefinition(node, node.properties),
-			ClassBody: node => checkMethodDefinition(node, node.body),
+			ObjectExpression: node => checkMethodDefinition(node.properties),
+			ClassBody: node => checkMethodDefinition(node.body),
 		};
 	},
 });
