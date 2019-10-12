@@ -20,6 +20,7 @@
     "dependencies": {
         "@types/node": "^12.7.12",
         "@typescript-eslint/experimental-utils": "^2.3.3",
+        "ts-simple-type": "^0.3.6",
         "tsutils": "^3.17.1",
         "typescript": "^3.6.4"
     },

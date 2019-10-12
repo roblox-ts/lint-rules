@@ -27,7 +27,8 @@
 		"@typescript-eslint/no-non-null-assertion": "off",
 		"no-undef-init": "error",
 		"@typescript-eslint/no-for-in-array": "error",
-		"prefer-const": "warn"
+		"prefer-const": "warn",
+		"@typescript-eslint/no-use-before-define": "off"
 	},
 	"settings": {},
 	"parser": "@typescript-eslint/parser",
