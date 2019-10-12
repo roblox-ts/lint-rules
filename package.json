@@ -3,11 +3,11 @@
     "version": "0.0.6",
     "main": "out/index.js",
     "devDependencies": {
-        "@typescript-eslint/eslint-plugin": "^2.2.0",
-        "@typescript-eslint/parser": "^2.2.0",
-        "eslint": "^6.3.0",
-        "eslint-config-prettier": "^6.3.0",
-        "eslint-plugin-prettier": "^3.1.0",
+        "@typescript-eslint/eslint-plugin": "^2.3.3",
+        "@typescript-eslint/parser": "^2.3.3",
+        "eslint": "^6.5.1",
+        "eslint-config-prettier": "^6.4.0",
+        "eslint-plugin-prettier": "^3.1.1",
         "prettier": "^1.18.2"
     },
     "engines": {
@@ -18,10 +18,10 @@
         "prepublishOnly": "tsc"
     },
     "dependencies": {
-        "@types/node": "^12.7.5",
-        "@typescript-eslint/experimental-utils": "^2.2.0",
+        "@types/node": "^12.7.12",
+        "@typescript-eslint/experimental-utils": "^2.3.3",
         "tsutils": "^3.17.1",
-        "typescript": "^3.6.3"
+        "typescript": "^3.6.4"
     },
     "files": [
         "out"
