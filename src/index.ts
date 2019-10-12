@@ -61,6 +61,7 @@ export = makePlugin({
 					"no-value-typeof": "error",
 					"no-object-math": "error",
 					"no-rbx-postfix-new": "error",
+					"lua-truthiness": "warn",
 				}),
 				"no-debugger": "error",
 				"no-labels": "error",

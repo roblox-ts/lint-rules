@@ -1,5 +1,4 @@
 import { AST_NODE_TYPES, TSESTree } from "@typescript-eslint/experimental-utils";
-import ts from "typescript";
 import { ExpressionWithTest, getParserServices, makeRule, getConstrainedType } from "../util";
 
 export const misleadingLuatupleChecksName = "misleading-luatuple-checks";
