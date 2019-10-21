@@ -8,3 +8,4 @@ export * from "./noValueTypeOf";
 export * from "./noObjectMath";
 export * from "./noRbxPostFixNew";
 export * from "./lua-truthiness";
+export * from "./restrict-comparisons";

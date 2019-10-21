@@ -68,3 +68,7 @@ function skipNodesES(node: TSESTree.Node) {
 
 	return node;
 }
+
+function hasTypeFlag(type: ts.Type, flag: ts.TypeFlags) {
+	return (type.getFlags() & flag) === flag;
+}

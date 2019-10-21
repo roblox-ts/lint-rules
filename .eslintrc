@@ -3,7 +3,7 @@
 	"plugins": ["@typescript-eslint", "@typescript-eslint/eslint-plugin", "prettier"],
 	"rules": {
 		"prettier/prettier": [
-			"error",
+			"warn",
 			{
 				"semi": true,
 				"trailingComma": "all",

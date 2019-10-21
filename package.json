@@ -3,8 +3,8 @@
     "version": "0.0.6",
     "main": "out/index.js",
     "devDependencies": {
-        "@typescript-eslint/eslint-plugin": "^2.3.3",
-        "@typescript-eslint/parser": "^2.3.3",
+        "@typescript-eslint/eslint-plugin": "^2.4.0",
+        "@typescript-eslint/parser": "^2.4.0",
         "eslint": "^6.5.1",
         "eslint-config-prettier": "^6.4.0",
         "eslint-plugin-prettier": "^3.1.1",
@@ -18,8 +18,8 @@
         "prepublishOnly": "tsc"
     },
     "dependencies": {
-        "@types/node": "^12.7.12",
-        "@typescript-eslint/experimental-utils": "^2.3.3",
+        "@types/node": "^12.11.1",
+        "@typescript-eslint/experimental-utils": "^2.4.0",
         "ts-simple-type": "^0.3.6",
         "tsutils": "^3.17.1",
         "typescript": "^3.6.4"
