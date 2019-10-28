@@ -5,7 +5,7 @@
 
 What follows is an incomplete guide on how to get started using typescript-eslint with eslint-plugin-roblox-ts and prettier. We eventually plan to make a better guide and automate a number of these steps through `rbxtsc` command line options. But, for now, here is how to use these lint rules with VSCode.
 
-## Step 1: Install the VSCode plugins
+## Step 1: Install the ESLint plugin for VSCode
 Install the following:
 
 <a href="https://marketplace.visualstudio.com/items?itemName=dbaeumer.vscode-eslint"><img src="https://camo.githubusercontent.com/e16321b339b250b46af5bcb05ed36892e6770342/68747470733a2f2f64626165756d65722e67616c6c65727963646e2e76736173736574732e696f2f657874656e73696f6e732f64626165756d65722f7673636f64652d65736c696e742f312e392e312f313536363239383133363236392f4d6963726f736f66742e56697375616c53747564696f2e53657276696365732e49636f6e732e44656661756c74" data-canonical-src="https://dbaeumer.gallerycdn.vsassets.io/extensions/dbaeumer/vscode-eslint/1.9.1/1566298136269/Microsoft.VisualStudio.Services.Icons.Default" width="100" height="100"></a>
