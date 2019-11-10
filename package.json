@@ -1,6 +1,6 @@
 {
     "name": "eslint-plugin-roblox-ts",
-    "version": "0.0.7",
+    "version": "0.0.8",
     "main": "out/index.js",
     "devDependencies": {
         "@typescript-eslint/eslint-plugin": "^2.6.1",
