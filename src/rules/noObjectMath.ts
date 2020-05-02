@@ -2,12 +2,16 @@ import { makeRule, getParserServices, getConstrainedTypeAtLocation } from "../ut
 import ts from "typescript";
 
 const dataTypes = ["CFrame", "UDim", "UDim2", "Vector2", "Vector2int16", "Vector3", "Vector3int16"];
-const opTypes = new Map([
+const mathOperationSymbolsToMacroNames = new Map([
 	["+", "add"] as const,
 	["-", "sub"] as const,
 	["*", "mul"] as const,
 	["/", "div"] as const,
 ]) as ReadonlyMap<string, string>;
+const safeOperationSymbols = new Set<string>([
+	"===",
+	"!=="
+]);
 
 type ViolationType = "addViolation" | "subViolation" | "mulViolation" | "divViolation" | "otherViolation";
 
@@ -34,7 +38,6 @@ export const noObjectMath = makeRule<[], ViolationType>({
 	},
 	defaultOptions: [],
 	create(context) {
-		const sourceCode = context.getSourceCode();
 		const service = getParserServices(context);
 		const checker = service.program.getTypeChecker();
 
@@ -46,17 +49,17 @@ export const noObjectMath = makeRule<[], ViolationType>({
 				const symbol = type.getSymbol();
 
 				if (symbol && dataTypes.includes(symbol.getName())) {
-					const oper = opTypes.get(node.operator);
-					if (oper) {
+					const macroName = mathOperationSymbolsToMacroNames.get(node.operator);
+					if (macroName) {
 						return context.report({
 							node,
-							messageId: `${oper}Violation` as ViolationType,
+							messageId: `${macroName}Violation` as ViolationType,
 							fix: fix => [
-								fix.replaceTextRange([left.range[1], right.range[0]], `.${oper}(`),
+								fix.replaceTextRange([left.range[1], right.range[0]], `.${macroName}(`),
 								fix.insertTextAfter(right, ")"),
 							],
 						});
-					} else {
+					} else if (!safeOperationSymbols.has(node.operator)) {
 						return context.report({
 							node,
 							messageId: "otherViolation",
