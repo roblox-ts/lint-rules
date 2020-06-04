@@ -24,7 +24,7 @@ export const module = makeRule<[], "moduleViolation">({
 
 		return {
 			Program(node) {
-				const tsNode = service.esTreeNodeToTSNodeMap.get<ts.SourceFile>(node);
+				const tsNode = service.esTreeNodeToTSNodeMap.get(node);
 				if (tsNode.externalModuleIndicator === undefined) {
 					context.report({
 						node: node.body[0],

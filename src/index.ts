@@ -15,7 +15,7 @@ const makePlugin = (obj: {
 
 	for (const ruleName in rules) {
 		ruleNames.add(ruleName);
-		const url = rules[ruleName].meta.docs.url;
+		const url = rules[ruleName].meta.docs?.url;
 		if (ruleName !== url) {
 			throw new Error(`Name mismatch in eslint-plugin-roblox-ts: ${ruleName} vs ${url}`);
 		}

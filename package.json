@@ -18,11 +18,10 @@
 		"prepublishOnly": "tsc"
 	},
 	"dependencies": {
-		"@types/node": "^12.12.7",
-		"@typescript-eslint/experimental-utils": "^2.6.1",
+		"@types/node": "^12.12.44",
+		"@typescript-eslint/experimental-utils": "^2.34.0",
 		"ts-simple-type": "^0.3.7",
-		"tsutils": "^3.17.1",
-		"typescript": "^3.7.2"
+		"typescript": "^3.9.5"
 	},
 	"files": [
 		"out"

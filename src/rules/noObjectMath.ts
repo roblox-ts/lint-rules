@@ -41,7 +41,7 @@ export const noObjectMath = makeRule<[], ViolationType>({
 		return {
 			BinaryExpression(node) {
 				const { left, right } = node;
-				const tsNode = service.esTreeNodeToTSNodeMap.get<ts.ExpressionStatement>(left);
+				const tsNode = service.esTreeNodeToTSNodeMap.get(left);
 				const type = getConstrainedTypeAtLocation(checker, tsNode);
 				const symbol = type.getSymbol();
 
