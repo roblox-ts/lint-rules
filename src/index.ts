@@ -52,15 +52,17 @@ export = makePlugin({
 		recommended: {
 			rules: {
 				...robloxTSSettings({
-					"misleading-luatuple-checks": "warn",
 					"no-delete": "error",
 					"no-for-in": "error",
 					"no-getters-or-setters": "error",
 					"no-null": "error",
-					"no-regex": "error",
-					"no-value-typeof": "error",
 					"no-object-math": "error",
 					"no-rbx-postfix-new": "error",
+					"no-regex": "error",
+					"no-value-typeof": "error",
+					module: "error",
+
+					"misleading-luatuple-checks": "warn",
 					"lua-truthiness": "warn",
 				}),
 				"no-debugger": "error",
