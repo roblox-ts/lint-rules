@@ -1,0 +1,43 @@
+-   [x] noForInStatement
+-   [x] noLabeledStatement
+-   [x] noDebuggerStatement
+-   [x] noDeleteExpression
+-   [x] noNullLiteral
+-   [ ] noPrivateIdentifier
+-   [x] noTypeOfExpression
+-   [x] noVoidExpression
+-   [x] noRegex
+-   [ ] noAny
+-   [x] noVar
+-   [x] noGetterSetter
+-   [x] noEqualsEquals
+-   [x] noExclamationEquals
+-   [ ] noComma
+-   [ ] noEnumMerging
+-   [ ] noNamespaceMerging
+-   [ ] noSpreadDestructuring
+-   [ ] noFunctionExpressionName
+-   [ ] noPrecedingSpreadElement
+-   [ ] noDestructureAssignmentExpression
+-   [ ] noExportAssignmentLet
+-   [ ] noExportLetAlias
+-   [ ] noGlobalThis
+-   [ ] noArguments
+-   [ ] noPrototype
+-   [ ] noSuperProperty
+-   [ ] noNonNumberRelationOperator
+-   [ ] noOptionalMacroCall
+-   [ ] noMixedTypeCall
+-   [ ] noIndexWithoutCall
+-   [ ] noMacroWithoutCall
+-   [ ] noConstructorMacroWithoutNew
+-   [ ] noMacroExtends
+-   [ ] missingImportOrExport
+-   [ ] noModuleSpecifierFile
+-   [ ] noRojoData
+-   [ ] noNonModuleImport
+-   [ ] noIsolatedImport
+-   [ ] noRoactInheritance
+-   [ ] noSuperPropertyCallRoactComponent
+-   [ ] noSuperConstructorRoactComponent
+-   [ ] noJsxText
