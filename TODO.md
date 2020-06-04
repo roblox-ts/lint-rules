@@ -12,7 +12,7 @@
 -   [x] noGetterSetter
 -   [x] noEqualsEquals
 -   [x] noExclamationEquals
--   [ ] noComma
+-   [x] noComma
 -   [ ] noEnumMerging
 -   [ ] noNamespaceMerging
 -   [ ] noSpreadDestructuring
