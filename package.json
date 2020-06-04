@@ -18,8 +18,8 @@
 		"prepublishOnly": "tsc"
 	},
 	"dependencies": {
-		"@types/node": "^12.12.44",
-		"@typescript-eslint/experimental-utils": "^2.34.0",
+		"@types/node": "^14.0.11",
+		"@typescript-eslint/experimental-utils": "^3.1.0",
 		"ts-simple-type": "^0.3.7",
 		"typescript": "^3.9.5"
 	},
