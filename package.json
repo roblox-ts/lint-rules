@@ -3,12 +3,12 @@
     "version": "0.0.8",
     "main": "out/index.js",
     "devDependencies": {
-        "@typescript-eslint/eslint-plugin": "^2.6.1",
-        "@typescript-eslint/parser": "^2.6.1",
-        "eslint": "^6.6.0",
-        "eslint-config-prettier": "^6.5.0",
-        "eslint-plugin-prettier": "^3.1.1",
-        "prettier": "^1.19.1"
+        "@typescript-eslint/eslint-plugin": "^3.1.0",
+        "@typescript-eslint/parser": "^3.1.0",
+        "eslint": "^7.1.0",
+        "eslint-config-prettier": "^6.11.0",
+        "eslint-plugin-prettier": "^3.1.3",
+        "prettier": "^2.0.5"
     },
     "engines": {
         "node": ">=0.10.0"
