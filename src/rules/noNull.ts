@@ -29,12 +29,13 @@ export const noNull = makeRule<[], "nullViolation">({
 			},
 
 			Literal(node) {
-				if (node.value === null)
+				if (node.value === null) {
 					context.report({
 						node: node,
 						messageId: "nullViolation",
 						fix: (fixer) => fixer.replaceText(node, "undefined"),
 					});
+				}
 			},
 		};
 	},
