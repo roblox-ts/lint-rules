@@ -56,7 +56,7 @@ export const luaTruthiness = makeRule<[], "falsyStringNumberCheck">({
 						fix:
 							isAssignableToSimpleTypeKind(simpleType, SimpleTypeKind.UNDEFINED) &&
 							!isAssignableToSimpleTypeKind(simpleType, SimpleTypeKind.BOOLEAN)
-								? fix => fix.insertTextAfter(node, " !== undefined")
+								? (fix) => fix.insertTextAfter(node, " !== undefined")
 								: undefined,
 					});
 				}

@@ -2,7 +2,12 @@ import { makeRule, getParserServices, getConstrainedTypeAtLocation } from "../ut
 import ts from "typescript";
 
 const dataTypes = ["CFrame", "UDim", "UDim2", "Vector2", "Vector2int16", "Vector3", "Vector3int16"] as const;
-const opTypes = new Map([["+", "add"], ["-", "sub"], ["*", "mul"], ["/", "div"]]) as ReadonlyMap<string, string>;
+const opTypes = new Map([
+	["+", "add"],
+	["-", "sub"],
+	["*", "mul"],
+	["/", "div"],
+]) as ReadonlyMap<string, string>;
 
 type ViolationType = "newViolation";
 

@@ -1,7 +1,7 @@
 import { ESLintUtils, ParserServices, TSESLint, TSESTree, AST_NODE_TYPES } from "@typescript-eslint/experimental-utils";
 import ts from "typescript";
 
-export const makeRule = ESLintUtils.RuleCreator(name => {
+export const makeRule = ESLintUtils.RuleCreator((name) => {
 	return name;
 });
 
