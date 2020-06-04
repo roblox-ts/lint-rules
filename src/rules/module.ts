@@ -27,7 +27,7 @@ export const module = makeRule<[], "moduleViolation">({
 				const tsNode = service.esTreeNodeToTSNodeMap.get<ts.SourceFile>(node);
 				if (tsNode.externalModuleIndicator === undefined) {
 					context.report({
-						node,
+						node: node.body[0],
 						messageId: "moduleViolation",
 						fix: (fixer) => fixer.insertTextBefore(node, "export {};\n"),
 					});
