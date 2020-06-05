@@ -56,6 +56,7 @@ export = makePlugin({
 					"no-delete": "error",
 					"no-enum-merging": "error",
 					"no-for-in": "error",
+					"no-function-expression-id": "error",
 					"no-getters-or-setters": "error",
 					"no-global-this": "error",
 					"no-namespace-merging": "error",

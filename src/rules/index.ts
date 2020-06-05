@@ -5,6 +5,7 @@ export * from "./noAny";
 export * from "./noDelete";
 export * from "./noEnumMerging";
 export * from "./noForIn";
+export * from "./noFunctionExpressionName";
 export * from "./noGettersOrSetters";
 export * from "./noGlobalThis";
 export * from "./noNamespaceMerging";
