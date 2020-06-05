@@ -1,4 +1,4 @@
-import { makeRule } from "../util";
+import { makeRule } from "../util/rules";
 
 export const noRegexName = "no-regex";
 export const noRegex = makeRule<[], "regexViolation">({

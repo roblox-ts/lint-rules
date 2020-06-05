@@ -1,5 +1,5 @@
 import { TSESTree } from "@typescript-eslint/typescript-estree";
-import { makeRule } from "../util";
+import { makeRule } from "../util/rules";
 
 export const noGettersOrSettersName = "no-getters-or-setters";
 export const noGettersOrSetters = makeRule<[], "getterSetterViolation">({

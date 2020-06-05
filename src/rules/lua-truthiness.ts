@@ -1,5 +1,5 @@
 import { AST_NODE_TYPES, TSESTree } from "@typescript-eslint/experimental-utils";
-import { ExpressionWithTest, getParserServices, makeRule, getConstrainedType } from "../util";
+import { ExpressionWithTest, getParserServices, makeRule, getConstrainedType } from "../util/rules";
 import {
 	isAssignableToType,
 	SimpleTypeKind,

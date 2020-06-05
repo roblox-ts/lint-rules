@@ -1,5 +1,5 @@
 import { TSESLint } from "@typescript-eslint/experimental-utils";
-import { makeRule, robloxTSSettings } from "./util";
+import { makeRule, robloxTSSettings } from "./util/rules";
 import * as ruleImports from "./rules";
 
 /** We just use this for intellisense */
@@ -52,6 +52,7 @@ export = makePlugin({
 		recommended: {
 			rules: {
 				...robloxTSSettings({
+					"no-any": "error",
 					"no-delete": "error",
 					"no-for-in": "error",
 					"no-getters-or-setters": "error",

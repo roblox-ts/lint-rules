@@ -1,4 +1,4 @@
-import { makeRule } from "../util";
+import { makeRule } from "../util/rules";
 
 export const noDeleteName = "no-delete";
 export const noDelete = makeRule<[], "deleteViolation">({

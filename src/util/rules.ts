@@ -8,7 +8,7 @@ export const makeRule = ESLintUtils.RuleCreator((name) => {
 type ExtractStringMembers<T> = Extract<T[keyof T], string>;
 
 export const robloxTSSettings = (
-	o: { [K in ExtractStringMembers<typeof import("./rules")>]: "error" | "warn" | "off" },
+	o: { [K in ExtractStringMembers<typeof import("../rules")>]: "error" | "warn" | "off" },
 ) => {
 	const settings: {
 		[K: string]: "error" | "warn" | "off";

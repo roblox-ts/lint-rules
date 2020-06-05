@@ -1,4 +1,4 @@
-import { makeRule, getParserServices } from "../util";
+import { makeRule, getParserServices } from "../util/rules";
 import ts from "typescript";
 
 export const noPrototypeName = "no-prototype";

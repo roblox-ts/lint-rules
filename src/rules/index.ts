@@ -1,6 +1,7 @@
 export * from "./lua-truthiness";
 export * from "./misleadingLuatupleChecks";
 export * from "./module";
+export * from "./noAny";
 export * from "./noDelete";
 export * from "./noForIn";
 export * from "./noGettersOrSetters";

@@ -1,4 +1,4 @@
-import { makeRule } from "../util";
+import { makeRule } from "../util/rules";
 
 export const noNullName = "no-null";
 export const noNull = makeRule<[], "nullViolation">({

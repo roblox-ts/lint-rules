@@ -1,4 +1,4 @@
-import { makeRule } from "../util";
+import { makeRule } from "../util/rules";
 
 export const noForInName = "no-for-in";
 export const noForIn = makeRule<[], "forInViolation">({

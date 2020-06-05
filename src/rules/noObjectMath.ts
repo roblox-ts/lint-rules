@@ -1,4 +1,4 @@
-import { makeRule, getParserServices, getConstrainedTypeAtLocation } from "../util";
+import { makeRule, getParserServices, getConstrainedTypeAtLocation } from "../util/rules";
 import ts from "typescript";
 
 const dataTypes = ["CFrame", "UDim", "UDim2", "Vector2", "Vector2int16", "Vector3", "Vector3int16"];
