@@ -5,6 +5,7 @@ export * from "./noAny";
 export * from "./noDelete";
 export * from "./noForIn";
 export * from "./noGettersOrSetters";
+export * from "./noGlobalThis";
 export * from "./noNull";
 export * from "./noObjectMath";
 export * from "./noPrototype";

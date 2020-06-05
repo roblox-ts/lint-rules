@@ -32,16 +32,22 @@ export function isAnyType(type: ts.Type) {
 }
 
 export function isArrayType(checker: ts.TypeChecker, type: ts.Type) {
-	return isSomeType(
-		type,
-		(t) =>
-			checker.isTupleType(t) ||
-			checker.isArrayLikeType(t) ||
-			t.symbol.name === "ReadonlyArray" ||
-			t.symbol.name === "Array" ||
-			t.symbol.name === "ReadVoxelsArray" ||
-			t.symbol.name === "TemplateStringsArray",
-	);
+	return isSomeType(type, (t) => {
+		if (checker.isTupleType(t) || checker.isArrayLikeType(t)) {
+			return true;
+		}
+		if (t.symbol) {
+			if (
+				t.symbol.name === "ReadonlyArray" ||
+				t.symbol.name === "Array" ||
+				t.symbol.name === "ReadVoxelsArray" ||
+				t.symbol.name === "TemplateStringsArray"
+			) {
+				return true;
+			}
+		}
+		return false;
+	});
 }
 
 export function getTypeArguments(checker: ts.TypeChecker, type: ts.Type) {
