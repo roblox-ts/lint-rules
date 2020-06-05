@@ -23,7 +23,6 @@ export const noPrototype = makeRule<[], "prototypeViolation">({
 		return {
 			MemberExpression(node) {
 				const tsNode = service.esTreeNodeToTSNodeMap.get(node);
-				console.log(tsNode.getText());
 				if (ts.isPrototypeAccess(tsNode)) {
 					context.report({
 						node: node,
