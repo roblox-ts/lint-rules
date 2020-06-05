@@ -1,7 +1,8 @@
 import { TSESTree } from "@typescript-eslint/experimental-utils";
 import ts from "typescript";
 import { getParserServices, makeRule } from "../util/rules";
-import { getType, isAnyType } from "../util/types";
+import { getType, isAnyType, isArrayType, getTypeArguments } from "../util/types";
+import { skipDownwards } from "../util/traversal";
 
 export const noAnyName = "no-any";
 export const noAny = makeRule<[], "anyViolation">({
@@ -25,7 +26,21 @@ export const noAny = makeRule<[], "anyViolation">({
 		const checker = service.program.getTypeChecker();
 
 		function validateNotAnyType(esNode: TSESTree.Expression, tsNode: ts.Expression) {
-			if (isAnyType(getType(checker, tsNode))) {
+			if (ts.isSpreadElement(tsNode)) {
+				tsNode = skipDownwards(tsNode.expression);
+			}
+
+			let type = getType(checker, tsNode);
+
+			if (isArrayType(checker, type)) {
+				// Array<T> -> T
+				const typeArguments = getTypeArguments(checker, type);
+				if (typeArguments.length > 0) {
+					type = typeArguments[0];
+				}
+			}
+
+			if (isAnyType(type)) {
 				context.report({
 					messageId: "anyViolation",
 					node: esNode,
@@ -48,21 +63,11 @@ export const noAny = makeRule<[], "anyViolation">({
 			},
 
 			CallExpression(esNode) {
-				const tsNode = service.esTreeNodeToTSNodeMap.get(esNode);
-				validateNotAnyType(esNode.callee, tsNode.expression);
-				for (let i = 0; i < esNode.arguments.length; i++) {
-					validateNotAnyType(esNode.arguments[i], tsNode.arguments[i]);
-				}
+				validateNotAnyType(esNode.callee, service.esTreeNodeToTSNodeMap.get(esNode).expression);
 			},
 
 			NewExpression(esNode) {
-				const tsNode = service.esTreeNodeToTSNodeMap.get(esNode);
-				validateNotAnyType(esNode.callee, tsNode.expression);
-				if (tsNode.arguments) {
-					for (let i = 0; i < esNode.arguments.length; i++) {
-						validateNotAnyType(esNode.arguments[i], tsNode.arguments[i]);
-					}
-				}
+				validateNotAnyType(esNode.callee, service.esTreeNodeToTSNodeMap.get(esNode).expression);
 			},
 
 			SpreadElement(esNode) {

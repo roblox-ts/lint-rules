@@ -22,4 +22,8 @@ declare module "typescript" {
 		| PropertyAccessEntityNameExpression
 		| BindableStaticElementAccessExpression;
 	export function isPrototypeAccess(node: Node): node is ts.BindableStaticAccessExpression;
+	export interface TypeChecker {
+		isTupleType(type: Type): boolean;
+		isArrayLikeType(type: Type): boolean;
+	}
 }

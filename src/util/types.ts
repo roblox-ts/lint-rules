@@ -30,3 +30,20 @@ export function isSomeType(type: ts.Type, cb: (type: ts.Type) => boolean) {
 export function isAnyType(type: ts.Type) {
 	return isSomeType(type, (t) => !!(t.flags & ts.TypeFlags.Any));
 }
+
+export function isArrayType(checker: ts.TypeChecker, type: ts.Type) {
+	return isSomeType(
+		type,
+		(t) =>
+			checker.isTupleType(t) ||
+			checker.isArrayLikeType(t) ||
+			t.symbol.name === "ReadonlyArray" ||
+			t.symbol.name === "Array" ||
+			t.symbol.name === "ReadVoxelsArray" ||
+			t.symbol.name === "TemplateStringsArray",
+	);
+}
+
+export function getTypeArguments(checker: ts.TypeChecker, type: ts.Type) {
+	return checker.getTypeArguments(type as ts.TypeReference) ?? [];
+}
