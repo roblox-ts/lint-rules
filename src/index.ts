@@ -54,6 +54,7 @@ export = makePlugin({
 				...robloxTSSettings({
 					"no-any": "error",
 					"no-delete": "error",
+					"no-enum-merging": "error",
 					"no-for-in": "error",
 					"no-getters-or-setters": "error",
 					"no-global-this": "error",
