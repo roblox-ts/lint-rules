@@ -6,6 +6,7 @@ export * from "./noForIn";
 export * from "./noGettersOrSetters";
 export * from "./noNull";
 export * from "./noObjectMath";
+export * from "./noPrototype";
 export * from "./noRbxPostFixNew";
 export * from "./noRegex";
 export * from "./noValueTypeOf";

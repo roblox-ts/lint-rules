@@ -21,7 +21,6 @@ export const module = makeRule<[], "moduleViolation">({
 	defaultOptions: [],
 	create(context) {
 		const service = getParserServices(context);
-
 		return {
 			Program(node) {
 				const tsNode = service.esTreeNodeToTSNodeMap.get(node);

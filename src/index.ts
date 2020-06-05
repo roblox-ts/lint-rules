@@ -57,6 +57,7 @@ export = makePlugin({
 					"no-getters-or-setters": "error",
 					"no-null": "error",
 					"no-object-math": "error",
+					"no-prototype": "error",
 					"no-rbx-postfix-new": "error",
 					"no-regex": "error",
 					"no-value-typeof": "error",
