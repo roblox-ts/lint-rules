@@ -7,6 +7,7 @@ export * from "./noEnumMerging";
 export * from "./noForIn";
 export * from "./noGettersOrSetters";
 export * from "./noGlobalThis";
+export * from "./noNamespaceMerging";
 export * from "./noNull";
 export * from "./noObjectMath";
 export * from "./noPrototype";

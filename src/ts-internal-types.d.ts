@@ -26,4 +26,5 @@ declare module "typescript" {
 		isTupleType(type: Type): boolean;
 		isArrayLikeType(type: Type): boolean;
 	}
+	function isInstantiatedModule(node: ModuleDeclaration, preserveConstEnums: boolean): boolean;
 }

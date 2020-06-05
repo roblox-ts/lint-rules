@@ -58,6 +58,7 @@ export = makePlugin({
 					"no-for-in": "error",
 					"no-getters-or-setters": "error",
 					"no-global-this": "error",
+					"no-namespace-merging": "error",
 					"no-null": "error",
 					"no-object-math": "error",
 					"no-prototype": "error",
