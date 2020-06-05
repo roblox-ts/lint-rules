@@ -1,8 +1,8 @@
 import { TSESTree } from "@typescript-eslint/experimental-utils";
 import ts from "typescript";
 import { getParserServices, makeRule } from "../util/rules";
-import { getType, isAnyType, isArrayType, getTypeArguments } from "../util/types";
 import { skipDownwards } from "../util/traversal";
+import { getType, getTypeArguments, isAnyType, isArrayType } from "../util/types";
 
 export const noAnyName = "no-any";
 export const noAny = makeRule<[], "anyViolation">({

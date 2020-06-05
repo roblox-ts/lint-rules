@@ -1,13 +1,13 @@
 import { AST_NODE_TYPES, TSESTree } from "@typescript-eslint/experimental-utils";
-import { ExpressionWithTest, getParserServices, makeRule, getConstrainedType } from "../util/rules";
 import {
+	isAssignableToSimpleTypeKind,
 	isAssignableToType,
-	SimpleTypeKind,
 	SimpleType,
 	SimpleTypeComparisonOptions,
+	SimpleTypeKind,
 	toSimpleType,
-	isAssignableToSimpleTypeKind,
 } from "ts-simple-type";
+import { ExpressionWithTest, getConstrainedType, getParserServices, makeRule } from "../util/rules";
 
 const falsyStringOrNumber: SimpleType = {
 	kind: SimpleTypeKind.INTERSECTION,

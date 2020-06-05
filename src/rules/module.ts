@@ -1,5 +1,4 @@
-import { makeRule, getParserServices } from "../util/rules";
-import ts from "typescript";
+import { getParserServices, makeRule } from "../util/rules";
 
 export const moduleName = "module";
 export const module = makeRule<[], "moduleViolation">({

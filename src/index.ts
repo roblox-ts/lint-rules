@@ -1,6 +1,6 @@
 import { TSESLint } from "@typescript-eslint/experimental-utils";
-import { makeRule, robloxTSSettings } from "./util/rules";
 import * as ruleImports from "./rules";
+import { makeRule, robloxTSSettings } from "./util/rules";
 
 /** We just use this for intellisense */
 const makePlugin = (obj: {

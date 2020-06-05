@@ -1,5 +1,4 @@
-import { makeRule, getParserServices, getConstrainedTypeAtLocation } from "../util/rules";
-import ts from "typescript";
+import { getConstrainedTypeAtLocation, getParserServices, makeRule } from "../util/rules";
 
 const dataTypes = ["CFrame", "UDim", "UDim2", "Vector2", "Vector2int16", "Vector3", "Vector3int16"];
 const mathOperationSymbolsToMacroNames = new Map([

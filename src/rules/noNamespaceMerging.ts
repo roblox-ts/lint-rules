@@ -1,5 +1,5 @@
-import { makeRule, getParserServices } from "../util/rules";
 import ts from "typescript";
+import { getParserServices, makeRule } from "../util/rules";
 
 function hasMultipleInstantiations(symbol: ts.Symbol): boolean {
 	let amtValueDeclarations = 0;

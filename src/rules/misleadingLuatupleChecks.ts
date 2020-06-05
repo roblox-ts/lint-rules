@@ -1,5 +1,5 @@
 import { AST_NODE_TYPES, TSESTree } from "@typescript-eslint/experimental-utils";
-import { ExpressionWithTest, getParserServices, makeRule, getConstrainedType } from "../util/rules";
+import { ExpressionWithTest, getConstrainedType, getParserServices, makeRule } from "../util/rules";
 
 export const misleadingLuatupleChecksName = "misleading-luatuple-checks";
 export const misleadingLuatupleChecks = makeRule<[], "bannedLuaTupleCheck">({

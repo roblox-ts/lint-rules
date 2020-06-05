@@ -1,4 +1,4 @@
-import { makeRule, getParserServices } from "../util/rules";
+import { getParserServices, makeRule } from "../util/rules";
 
 export const noEnumMergingName = "no-enum-merging";
 export const noEnumMerging = makeRule<[], "enumMergingViolation">({
