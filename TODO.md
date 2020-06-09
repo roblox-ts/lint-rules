@@ -7,7 +7,7 @@
 -   [x] noTypeOfExpression
 -   [x] noVoidExpression
 -   [x] noRegex
--   [ ] noAny
+-   [x] noAny
 -   [x] noVar
 -   [x] noGetterSetter
 -   [x] noEqualsEquals
