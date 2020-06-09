@@ -13,17 +13,17 @@
 -   [x] noEqualsEquals
 -   [x] noExclamationEquals
 -   [x] noComma
--   [ ] noEnumMerging
--   [ ] noNamespaceMerging
+-   [x] noEnumMerging
+-   [x] noNamespaceMerging
 -   [ ] noSpreadDestructuring
 -   [ ] noFunctionExpressionName
 -   [ ] noPrecedingSpreadElement
 -   [ ] noDestructureAssignmentExpression
 -   [ ] noExportAssignmentLet
 -   [ ] noExportLetAlias
--   [ ] noGlobalThis
--   [ ] noArguments
--   [ ] noPrototype
+-   [x] noGlobalThis
+-   [x] noArguments
+-   [x] noPrototype
 -   [ ] noSuperProperty
 -   [ ] noNonNumberRelationOperator
 -   [ ] noOptionalMacroCall
