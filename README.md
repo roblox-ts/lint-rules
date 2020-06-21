@@ -15,30 +15,28 @@ Install the following:
 -->
 
 ## Step 2: Change your VSCode settings
-Make sure these settings are in your settings file (`Ctrl + ,` to open the settings UI, then press the `Open Settings (JSON)` button in the top right):
-```js
+Make sure the following settings are in your settings file (`Ctrl + ,` to open the settings UI, then press the `Open Settings (JSON)` button in the top right).
+
+These are according to my preferences, so feel free to change this according to your own desires:
+```json
+	"files.trimTrailingWhitespace": true,
+	"files.insertFinalNewline": true,
+	"files.trimFinalNewlines": true,
 	"[typescript]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode",
-		"editor.formatOnSave": false, // we turn this off because eslint.autoFixOnSave runs
+		"editor.defaultFormatter": "dbaeumer.vscode-eslint",
+		"editor.formatOnSave": true,
 		"editor.formatOnPaste": true,
-		"editor.formatOnType": true
+		"editor.formatOnType": true,
 	},
 	"[typescriptreact]": {
-		"editor.defaultFormatter": "esbenp.prettier-vscode",
-		"editor.formatOnSave": false,
+		"editor.defaultFormatter": "dbaeumer.vscode-eslint",
+		"editor.formatOnSave": true,
 		"editor.formatOnPaste": true,
-		"editor.formatOnType": true
+		"editor.formatOnType": true,
 	},
-	"eslint.validate": [
-		"javascript",
-		"javascriptreact",
-		{ "language": "typescript", "autoFix": true },
-		{ "language": "typescriptreact", "autoFix": true }
-	],
 	"eslint.packageManager": "npm",
 	"eslint.run": "onType",
-	"eslint.autoFixOnSave": true,
-	"prettier.eslintIntegration": true
+	"eslint.format.enable": true,
 ```
 
 ## Step 3: Setup the eslint config file
@@ -90,7 +88,12 @@ Make a file named `.eslintrc` and place this in the contents. If you have a pre-
         "@typescript-eslint/no-namespace": "off",
         "@typescript-eslint/no-non-null-assertion": "off",
         "@typescript-eslint/no-empty-function": "warn",
-        "prefer-const": "warn",
+	"prefer-const": [
+		"warn",
+		{
+			"destructuring": "all"
+		}
+	],
         "no-undef-init": "error"
     }
 }
