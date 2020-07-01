@@ -80,6 +80,14 @@ export = makePlugin({
 				"no-with": "error",
 				"prefer-rest-params": "error", // disables `arguments`
 				eqeqeq: "error",
+
+				// @typescript-eslint
+				"@typescript-eslint/explicit-module-boundary-types": "off",
+				"@typescript-eslint/no-unused-vars": "off",
+				"@typescript-eslint/explicit-function-return-type": "off",
+				"@typescript-eslint/no-namespace": "off",
+				"@typescript-eslint/no-non-null-assertion": "off",
+				"@typescript-eslint/no-empty-function": "warn",
 			},
 		},
 	},
