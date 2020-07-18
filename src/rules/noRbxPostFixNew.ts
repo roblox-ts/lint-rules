@@ -1,12 +1,15 @@
-import { getParserServices, makeRule } from "../util/rules";
+import ts, { MemberExpression } from "typescript";
+import { getConstrainedTypeAtLocation, getParserServices, makeRule } from "../util/rules";
 
-const dataTypes = ["CFrame", "UDim", "UDim2", "Vector2", "Vector2int16", "Vector3", "Vector3int16"] as const;
-const opTypes = new Map([
-	["+", "add"],
-	["-", "sub"],
-	["*", "mul"],
-	["/", "div"],
-]) as ReadonlyMap<string, string>;
+const dataTypes = [
+	"CFrameConstructor",
+	"UDimConstructor",
+	"UDim2Constructor",
+	"Vector2Constructor",
+	"Vector2int16Constructor",
+	"Vector3Constructor",
+	"Vector3int16Constructor",
+];
 
 type ViolationType = "newViolation";
 
@@ -29,12 +32,34 @@ export const noRbxPostFixNew = makeRule<[], ViolationType>({
 	},
 	defaultOptions: [],
 	create(context) {
-		const sourceCode = context.getSourceCode();
 		const service = getParserServices(context);
 		const checker = service.program.getTypeChecker();
 
-		// TODO: implement
+		return {
+			CallExpression(node) {
+				console.log("Got CallExpression");
+				console.log(node);
+				const propertyAccess = service.esTreeNodeToTSNodeMap.get(node.callee);
+				console.log(propertyAccess);
+				if (ts.isPropertyAccessExpression(propertyAccess)) {
+					const type = getConstrainedTypeAtLocation(checker, propertyAccess.expression);
+					const symbol = type.getSymbol();
 
-		return {};
+					console.log(type);
+					console.log(symbol?.getName());
+					console.log(propertyAccess.name);
+					if (symbol && dataTypes.includes(symbol.getName()) && propertyAccess.name.text === "new") {
+						return context.report({
+							node,
+							messageId: "newViolation",
+							fix: (fix) => [
+								fix.removeRange([node.callee.range[1] - 4, node.callee.range[1]]),
+								fix.insertTextBefore(node, "new "),
+							],
+						});
+					}
+				}
+			},
+		};
 	},
 });
