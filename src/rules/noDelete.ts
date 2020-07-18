@@ -16,6 +16,7 @@ export const noDelete = makeRule<[], "deleteViolation">({
 			deleteViolation:
 				"The delete operator is not supported. Setting the property to `undefined` has the same behaviour.",
 		},
+		fixable: "code",
 	},
 	defaultOptions: [],
 	create(context) {
@@ -29,7 +30,7 @@ export const noDelete = makeRule<[], "deleteViolation">({
 							return [
 								fix.insertTextAfter(node, " = undefined"),
 								// seven characters: "delete "
-								fix.removeRange([node.range[0], node.range[0] + 7]),
+								fix.removeRange([node.range[0], node.argument.range[0]]),
 							];
 						},
 					});
