@@ -12,7 +12,7 @@ export const noFunctionExpressionId = makeRule<[], "functionExpressionIdViolatio
 			requiresTypeChecking: false,
 		},
 		messages: {
-			functionExpressionIdViolation: "Function expression ids are not supported!",
+			functionExpressionIdViolation: "Function expression names are not supported!",
 		},
 		schema: [],
 		fixable: "code",
