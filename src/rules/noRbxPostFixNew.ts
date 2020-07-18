@@ -1,4 +1,4 @@
-import ts, { MemberExpression } from "typescript";
+import ts from "typescript";
 import { getConstrainedTypeAtLocation, getParserServices, makeRule } from "../util/rules";
 
 const dataTypes = [
