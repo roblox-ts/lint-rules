@@ -77,7 +77,7 @@ export const luaTruthiness = makeRule<[], "falsyStringNumberCheck">({
 			ForStatement: containsBoolean,
 			IfStatement: containsBoolean,
 			WhileStatement: containsBoolean,
-			LogicalExpression: ({ left }) => checkTruthy(left),
+			LogicalExpression: (node) => node.operator !== "??" && checkTruthy(node.left),
 			'UnaryExpression[operator="!"]': ({ argument }: TSESTree.UnaryExpression) => checkTruthy(argument),
 		};
 	},
