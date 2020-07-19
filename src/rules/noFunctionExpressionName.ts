@@ -12,9 +12,10 @@ export const noFunctionExpressionId = makeRule<[], "functionExpressionIdViolatio
 			requiresTypeChecking: false,
 		},
 		messages: {
-			functionExpressionIdViolation: "Function expression ids are not supported!",
+			functionExpressionIdViolation: "Function expression names are not supported!",
 		},
 		schema: [],
+		fixable: "code",
 	},
 	defaultOptions: [],
 	create(context) {
@@ -24,6 +25,7 @@ export const noFunctionExpressionId = makeRule<[], "functionExpressionIdViolatio
 					context.report({
 						node: node.id,
 						messageId: "functionExpressionIdViolation",
+						fix: (fix) => node.id && fix.removeRange(node.id.range),
 					});
 				}
 			},
