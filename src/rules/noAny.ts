@@ -13,7 +13,7 @@ export const noAny = makeRule<[], "anyViolation">({
 			description: "Bans prototype from being used",
 			category: "Possible Errors",
 			recommended: "error",
-			requiresTypeChecking: false,
+			requiresTypeChecking: true,
 		},
 		messages: {
 			anyViolation: "Using values of type `any` is not supported! Use `unknown` instead.",
