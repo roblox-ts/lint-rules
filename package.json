@@ -14,8 +14,8 @@
 		"node": ">=0.10.0"
 	},
 	"scripts": {
-		"build": "tsc & node out",
-		"prepublishOnly": "tsc",
+		"build": "tsc",
+		"prepublishOnly": "npm run build",
 		"eslint": "eslint \"src/**/*.ts\" --max-warnings 0"
 	},
 	"dependencies": {
