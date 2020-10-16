@@ -4,17 +4,16 @@ import {
 	isAssignableToType,
 	SimpleType,
 	SimpleTypeComparisonOptions,
-	SimpleTypeKind,
 	toSimpleType,
 } from "ts-simple-type";
 import { ExpressionWithTest, getConstrainedType, getParserServices, makeRule } from "../util/rules";
 
 const falsyStringOrNumber: SimpleType = {
-	kind: SimpleTypeKind.INTERSECTION,
+	kind: "INTERSECTION",
 	types: [
-		{ kind: SimpleTypeKind.NUMBER_LITERAL, value: 0 },
-		{ kind: SimpleTypeKind.NUMBER_LITERAL, value: NaN },
-		{ kind: SimpleTypeKind.STRING_LITERAL, value: "" },
+		{ kind: "NUMBER_LITERAL", value: 0 },
+		{ kind: "NUMBER_LITERAL", value: NaN },
+		{ kind: "STRING_LITERAL", value: "" },
 	],
 };
 
@@ -54,8 +53,8 @@ export const luaTruthiness = makeRule<[], "falsyStringNumberCheck">({
 						node,
 						messageId: "falsyStringNumberCheck",
 						fix:
-							isAssignableToSimpleTypeKind(simpleType, SimpleTypeKind.UNDEFINED) &&
-							!isAssignableToSimpleTypeKind(simpleType, SimpleTypeKind.BOOLEAN)
+							isAssignableToSimpleTypeKind(simpleType, "UNDEFINED") &&
+							!isAssignableToSimpleTypeKind(simpleType, "BOOLEAN")
 								? (fix) => fix.insertTextAfter(node, " !== undefined")
 								: undefined,
 					});

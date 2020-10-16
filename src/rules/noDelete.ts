@@ -13,15 +13,27 @@ export const noDelete = makeRule<[], "deleteViolation">({
 		},
 		schema: [],
 		messages: {
-			deleteViolation: "The delete operator is not supported. Please use a map instead and use map.delete()",
+			deleteViolation:
+				"The delete operator is not supported. Setting the property to `undefined` has the same behaviour.",
 		},
+		fixable: "code",
 	},
 	defaultOptions: [],
 	create(context) {
 		return {
 			UnaryExpression(node) {
 				if (node.operator === "delete") {
-					context.report({ node, messageId: "deleteViolation" });
+					context.report({
+						node,
+						messageId: "deleteViolation",
+						fix: (fix) => {
+							return [
+								fix.insertTextAfter(node, " = undefined"),
+								// seven characters: "delete "
+								fix.removeRange([node.range[0], node.argument.range[0]]),
+							];
+						},
+					});
 				}
 			},
 		};
