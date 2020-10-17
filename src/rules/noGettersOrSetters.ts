@@ -29,15 +29,15 @@ export const noGettersOrSetters = makeRule<[], "getterSetterViolation">({
 					context.report({
 						node,
 						messageId: "getterSetterViolation",
-						fix: (fix) => fix.removeRange([node.key.range[0] - 1, node.key.range[0]]),
+						fix: fix => fix.removeRange([node.key.range[0] - 1, node.key.range[0]]),
 					});
 				}
 			}
 		};
 
 		return {
-			ObjectExpression: (node) => checkMethodDefinition(node.properties),
-			ClassBody: (node) => checkMethodDefinition(node.body),
+			ObjectExpression: node => checkMethodDefinition(node.properties),
+			ClassBody: node => checkMethodDefinition(node.body),
 		};
 	},
 });

@@ -25,7 +25,7 @@ export const noForIn = makeRule<[], "forInViolation">({
 				context.report({
 					node,
 					messageId: "forInViolation",
-					fix: (fix) => fix.replaceTextRange([node.left.range[1], node.right.range[0]], " of "),
+					fix: fix => fix.replaceTextRange([node.left.range[1], node.right.range[0]], " of "),
 				});
 			},
 		};

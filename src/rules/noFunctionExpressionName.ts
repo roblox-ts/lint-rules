@@ -25,7 +25,7 @@ export const noFunctionExpressionId = makeRule<[], "functionExpressionIdViolatio
 					context.report({
 						node: node.id,
 						messageId: "functionExpressionIdViolation",
-						fix: (fix) => node.id && fix.removeRange(node.id.range),
+						fix: fix => node.id && fix.removeRange(node.id.range),
 					});
 				}
 			},

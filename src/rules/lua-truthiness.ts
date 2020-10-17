@@ -1,23 +1,14 @@
 import { AST_NODE_TYPES, TSESTree } from "@typescript-eslint/experimental-utils";
+import { ExpressionWithTest, getParserServices, makeRule } from "../util/rules";
 import {
-	isAssignableToSimpleTypeKind,
-	isAssignableToType,
-	SimpleType,
-	SimpleTypeComparisonOptions,
-	toSimpleType,
-} from "ts-simple-type";
-import { ExpressionWithTest, getConstrainedType, getParserServices, makeRule } from "../util/rules";
-
-const falsyStringOrNumber: SimpleType = {
-	kind: "INTERSECTION",
-	types: [
-		{ kind: "NUMBER_LITERAL", value: 0 },
-		{ kind: "NUMBER_LITERAL", value: NaN },
-		{ kind: "STRING_LITERAL", value: "" },
-	],
-};
-
-const typeComparisonOptions: SimpleTypeComparisonOptions = { strict: true };
+	getType,
+	isBooleanType,
+	isEmptyStringType,
+	isNaNType,
+	isNumberLiteralType,
+	isPossiblyType,
+	isUndefinedType,
+} from "../util/types";
 
 export const luaTruthinessName = "lua-truthiness";
 export const luaTruthiness = makeRule<[], "falsyStringNumberCheck">({
@@ -43,22 +34,23 @@ export const luaTruthiness = makeRule<[], "falsyStringNumberCheck">({
 		const checker = service.program.getTypeChecker();
 
 		function checkTruthy(node: TSESTree.Node) {
-			const symbol = getConstrainedType(service, checker, node);
+			const type = getType(checker, service.esTreeNodeToTSNodeMap.get(node));
 
-			if (symbol) {
-				const simpleType = toSimpleType(symbol, checker);
+			const isAssignableToUndefined = isPossiblyType(type, t => isUndefinedType(t));
+			const isAssignableToBoolean = isPossiblyType(type, t => isBooleanType(t));
+			const isAssignableToZero = isPossiblyType(type, t => isNumberLiteralType(t, 0));
+			const isAssignableToNaN = isPossiblyType(type, t => isNaNType(t));
+			const isAssignableToEmptyString = isPossiblyType(type, t => isEmptyStringType(t));
 
-				if (isAssignableToType(simpleType, falsyStringOrNumber, typeComparisonOptions)) {
-					context.report({
-						node,
-						messageId: "falsyStringNumberCheck",
-						fix:
-							isAssignableToSimpleTypeKind(simpleType, "UNDEFINED") &&
-							!isAssignableToSimpleTypeKind(simpleType, "BOOLEAN")
-								? (fix) => fix.insertTextAfter(node, " !== undefined")
-								: undefined,
-					});
-				}
+			if (isAssignableToZero || isAssignableToNaN || isAssignableToEmptyString) {
+				context.report({
+					node,
+					messageId: "falsyStringNumberCheck",
+					fix:
+						isAssignableToUndefined && !isAssignableToBoolean
+							? fix => fix.insertTextAfter(node, " !== undefined")
+							: undefined,
+				});
 			}
 		}
 
@@ -67,7 +59,9 @@ export const luaTruthiness = makeRule<[], "falsyStringNumberCheck">({
 		 * Filters all LogicalExpressions to prevent some duplicate reports.
 		 */
 		const containsBoolean = ({ test }: ExpressionWithTest) => {
-			if (test && test.type !== AST_NODE_TYPES.LogicalExpression) checkTruthy(test);
+			if (test && test.type !== AST_NODE_TYPES.LogicalExpression) {
+				checkTruthy(test);
+			}
 		};
 
 		return {

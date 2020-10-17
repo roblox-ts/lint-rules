@@ -26,7 +26,7 @@ export const noDelete = makeRule<[], "deleteViolation">({
 					context.report({
 						node,
 						messageId: "deleteViolation",
-						fix: (fix) => {
+						fix: fix => {
 							return [
 								fix.insertTextAfter(node, " = undefined"),
 								// seven characters: "delete "

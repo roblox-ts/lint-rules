@@ -36,7 +36,7 @@ const makePlugin = (obj: {
 
 function getRules() {
 	const rules: { [K: string]: ReturnType<typeof makeRule> } = {};
-	for (const [i, ruleName] of Object.entries(ruleImports).filter((t) => t[0].endsWith("Name")) as Array<
+	for (const [i, ruleName] of Object.entries(ruleImports).filter(t => t[0].endsWith("Name")) as Array<
 		[string, string]
 	>) {
 		rules[ruleName as string] = ruleImports[i.slice(0, -4) as keyof typeof ruleImports] as ReturnType<

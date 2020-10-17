@@ -24,7 +24,7 @@ export const noNull = makeRule<[], "nullViolation">({
 				context.report({
 					node: node,
 					messageId: "nullViolation",
-					fix: (fixer) => fixer.replaceText(node, "undefined"),
+					fix: fixer => fixer.replaceText(node, "undefined"),
 				});
 			},
 
@@ -33,7 +33,7 @@ export const noNull = makeRule<[], "nullViolation">({
 					context.report({
 						node: node,
 						messageId: "nullViolation",
-						fix: (fixer) => fixer.replaceText(node, "undefined"),
+						fix: fixer => fixer.replaceText(node, "undefined"),
 					});
 				}
 			},

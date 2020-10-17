@@ -2,7 +2,7 @@ import { TSESTree } from "@typescript-eslint/experimental-utils";
 import ts from "typescript";
 import { getParserServices, makeRule } from "../util/rules";
 import { skipDownwards } from "../util/traversal";
-import { getType, getTypeArguments, isAnyType, isArrayType } from "../util/types";
+import { getType, getTypeArguments, isAnyType, isArrayType, isDefinitelyType } from "../util/types";
 
 export const noAnyName = "no-any";
 export const noAny = makeRule<[], "anyViolation">({
@@ -32,7 +32,7 @@ export const noAny = makeRule<[], "anyViolation">({
 
 			let type = getType(checker, tsNode);
 
-			if (isArrayType(checker, type)) {
+			if (isDefinitelyType(type, t => isArrayType(checker, t))) {
 				// Array<T> -> T
 				const typeArguments = getTypeArguments(checker, type);
 				if (typeArguments.length > 0) {

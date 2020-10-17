@@ -30,7 +30,7 @@ export const misleadingLuatupleChecks = makeRule<[], "bannedLuaTupleCheck">({
 				context.report({
 					node,
 					messageId: "bannedLuaTupleCheck",
-					fix: (fix) => fix.insertTextAfter(node, "[0]"),
+					fix: fix => fix.insertTextAfter(node, "[0]"),
 				});
 		}
 

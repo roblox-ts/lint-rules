@@ -1,7 +1,7 @@
 import { ESLintUtils, ParserServices, TSESLint, TSESTree, AST_NODE_TYPES } from "@typescript-eslint/experimental-utils";
 import ts from "typescript";
 
-export const makeRule = ESLintUtils.RuleCreator((name) => {
+export const makeRule = ESLintUtils.RuleCreator(name => {
 	return name;
 });
 
@@ -59,12 +59,4 @@ export function getConstrainedTypeAtLocation(checker: ts.TypeChecker, node: ts.N
 
 export function getConstrainedType(service: RequiredParserServices, checker: ts.TypeChecker, node: TSESTree.Node) {
 	return getConstrainedTypeAtLocation(checker, service.esTreeNodeToTSNodeMap.get(node));
-}
-
-function skipNodesES(node: TSESTree.Node) {
-	while (node.type === AST_NODE_TYPES.TSNonNullExpression || node.type === AST_NODE_TYPES.TSTypeAssertion) {
-		node = node.expression;
-	}
-
-	return node;
 }

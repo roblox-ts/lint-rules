@@ -50,7 +50,7 @@ export const noObjectMath = makeRule<[], ViolationType>({
 						return context.report({
 							node,
 							messageId: `${macroName}Violation` as ViolationType,
-							fix: (fix) => [
+							fix: fix => [
 								fix.replaceTextRange([left.range[1], right.range[0]], `.${macroName}(`),
 								fix.insertTextAfter(right, ")"),
 							],

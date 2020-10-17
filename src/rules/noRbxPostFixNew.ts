@@ -45,7 +45,7 @@ export const noRbxPostFixNew = makeRule<[], ViolationType>({
 						return context.report({
 							node,
 							messageId: "newViolation",
-							fix: (fix) => [
+							fix: fix => [
 								fix.removeRange([node.callee.range[1] - 4, node.callee.range[1]]),
 								fix.insertTextBefore(node, "new "),
 							],

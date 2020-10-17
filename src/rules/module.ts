@@ -23,11 +23,11 @@ export const module = makeRule<[], "moduleViolation">({
 		return {
 			Program(node) {
 				const tsNode = service.esTreeNodeToTSNodeMap.get(node);
-				if (tsNode.externalModuleIndicator === undefined) {
+				if (!tsNode.isDeclarationFile && tsNode.externalModuleIndicator === undefined) {
 					context.report({
 						node,
 						messageId: "moduleViolation",
-						fix: (fixer) => fixer.insertTextBefore(node, "export {};\n"),
+						fix: fixer => fixer.insertTextBefore(node, "export {};\n"),
 					});
 				}
 			},
