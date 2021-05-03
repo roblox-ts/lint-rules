@@ -51,7 +51,7 @@ function isPossiblyTypeInner(type: ts.Type, callback: (type: ts.Type) => boolean
 		}
 
 		// defined type
-		if (isObjectType(type) && type.getProperties().length === 0) {
+		if (isDefinedType(type)) {
 			return true;
 		}
 
@@ -61,6 +61,12 @@ function isPossiblyTypeInner(type: ts.Type, callback: (type: ts.Type) => boolean
 
 export function isPossiblyType(type: ts.Type, cb: (type: ts.Type) => boolean) {
 	return isPossiblyTypeInner(type.getConstraint() ?? type, cb);
+}
+
+export function isDefinedType(type: ts.Type) {
+	return (
+		type.flags === ts.TypeFlags.Object && type.getProperties().length === 0 && type.getCallSignatures().length === 0
+	);
 }
 
 export function isAnyType(type: ts.Type) {
