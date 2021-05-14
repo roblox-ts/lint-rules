@@ -13,17 +13,15 @@ export const noSpreadDestructuring = makeRule<[], "spreadDestructuringViolation"
 			requiresTypeChecking: false,
 		},
 		messages: {
-			spreadDestructuringViolation: "spreadDestructuring is not supported!",
+			spreadDestructuringViolation: "Operator `...` is not supported for destructuring!",
 		},
 		schema: [],
 	},
 	defaultOptions: [],
 	create(context) {
-		const service = getParserServices(context);
 		return {
 			ArrayPattern(node) {
 				node.elements.forEach(element => {
-					console.log(element);
 					if (element?.type == "RestElement") {
 						context.report({
 							node: node,
@@ -31,16 +29,6 @@ export const noSpreadDestructuring = makeRule<[], "spreadDestructuringViolation"
 						});
 					}
 				});
-				const tsNode = service.esTreeNodeToTSNodeMap.get(node);
-				// tsNode.elements.forEach((element: ts.Node) => {
-				// 	console.log(element);
-				// 	if (isRestTypeNode(element)) {
-				// 		context.report({
-				// 			node: node,
-				// 			messageId: "spreadDestructuringViolation",
-				// 		});
-				// 	}
-				// });
 			},
 		};
 	},
