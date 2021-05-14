@@ -66,6 +66,7 @@ export = makePlugin({
 					"no-rbx-postfix-new": "error",
 					"no-regex": "error",
 					"no-value-typeof": "error",
+					"no-private-identifier": "error",
 					module: "error",
 
 					"misleading-luatuple-checks": "warn",
