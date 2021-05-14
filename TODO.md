@@ -3,7 +3,7 @@
 -   [x] noDebuggerStatement
 -   [x] noDeleteExpression
 -   [x] noNullLiteral
--   [ ] noPrivateIdentifier
+-   [x] noPrivateIdentifier
 -   [x] noTypeOfExpression
 -   [x] noVoidExpression
 -   [x] noRegex
@@ -15,7 +15,7 @@
 -   [x] noComma
 -   [x] noEnumMerging
 -   [x] noNamespaceMerging
--   [ ] noSpreadDestructuring
+-   [x] noSpreadDestructuring
 -   [ ] noFunctionExpressionName
 -   [ ] noPrecedingSpreadElement
 -   [ ] noDestructureAssignmentExpression
