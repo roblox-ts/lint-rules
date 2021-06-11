@@ -68,6 +68,7 @@ export = makePlugin({
 					"no-value-typeof": "error",
 					"no-private-identifier": "error",
 					"no-spread-destructuring": "error",
+					"no-preceding-spread-element": "error",
 					module: "error",
 
 					"misleading-luatuple-checks": "warn",
