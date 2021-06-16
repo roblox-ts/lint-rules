@@ -72,6 +72,7 @@ export = makePlugin({
 
 					"misleading-luatuple-checks": "warn",
 					"lua-truthiness": "warn",
+					"no-array-pairs": "warn",
 				}),
 				"no-debugger": "error",
 				"no-labels": "error",
