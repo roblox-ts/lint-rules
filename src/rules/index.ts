@@ -17,5 +17,6 @@ export * from "./noRegex";
 export * from "./noValueTypeOf";
 export * from "./noPrivateIdentifier";
 export * from "./noSpreadDestructuring";
+export * from "./noExportAssignmentLet";
 export * from "./noPrecedingSpreadElement";
 export * from "./noArrayPairs";

@@ -1,43 +1,43 @@
--   [x] noForInStatement
--   [x] noLabeledStatement
--   [x] noDebuggerStatement
--   [x] noDeleteExpression
--   [x] noNullLiteral
--   [x] noPrivateIdentifier
--   [x] noTypeOfExpression
--   [x] noVoidExpression
--   [x] noRegex
--   [x] noAny
--   [x] noVar
--   [x] noGetterSetter
--   [x] noEqualsEquals
--   [x] noExclamationEquals
--   [x] noComma
--   [x] noEnumMerging
--   [x] noNamespaceMerging
--   [x] noSpreadDestructuring
--   [ ] noFunctionExpressionName
--   [X] noPrecedingSpreadElement
--   [ ] noDestructureAssignmentExpression
--   [ ] noExportAssignmentLet
--   [ ] noExportLetAlias
--   [x] noGlobalThis
--   [x] noArguments
--   [x] noPrototype
--   [ ] noSuperProperty
--   [ ] noNonNumberRelationOperator
--   [ ] noOptionalMacroCall
--   [ ] noMixedTypeCall
--   [ ] noIndexWithoutCall
--   [ ] noMacroWithoutCall
--   [ ] noConstructorMacroWithoutNew
--   [ ] noMacroExtends
--   [ ] missingImportOrExport
--   [ ] noModuleSpecifierFile
--   [ ] noRojoData
--   [ ] noNonModuleImport
--   [ ] noIsolatedImport
--   [ ] noRoactInheritance
--   [ ] noSuperPropertyCallRoactComponent
--   [ ] noSuperConstructorRoactComponent
--   [ ] noJsxText
+- [x] noForInStatement
+- [x] noLabeledStatement
+- [x] noDebuggerStatement
+- [x] noDeleteExpression
+- [x] noNullLiteral
+- [x] noPrivateIdentifier
+- [x] noTypeOfExpression
+- [x] noVoidExpression
+- [x] noRegex
+- [x] noAny
+- [x] noVar
+- [x] noGetterSetter
+- [x] noEqualsEquals
+- [x] noExclamationEquals
+- [x] noComma
+- [x] noEnumMerging
+- [x] noNamespaceMerging
+- [x] noSpreadDestructuring
+- [ ] noFunctionExpressionName
+- [x] noPrecedingSpreadElement
+- [ ] noDestructureAssignmentExpression
+- [x] noExportAssignmentLet
+- [ ] noExportLetAlias
+- [x] noGlobalThis
+- [x] noArguments
+- [x] noPrototype
+- [ ] noSuperProperty
+- [ ] noNonNumberRelationOperator
+- [ ] noOptionalMacroCall
+- [ ] noMixedTypeCall
+- [ ] noIndexWithoutCall
+- [ ] noMacroWithoutCall
+- [ ] noConstructorMacroWithoutNew
+- [ ] noMacroExtends
+- [ ] missingImportOrExport
+- [ ] noModuleSpecifierFile
+- [ ] noRojoData
+- [ ] noNonModuleImport
+- [ ] noIsolatedImport
+- [ ] noRoactInheritance
+- [ ] noSuperPropertyCallRoactComponent
+- [ ] noSuperConstructorRoactComponent
+- [ ] noJsxText
