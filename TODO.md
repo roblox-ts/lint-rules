@@ -17,7 +17,7 @@
 - [x] noNamespaceMerging
 - [x] noSpreadDestructuring
 - [ ] noFunctionExpressionName
-- [ ] noPrecedingSpreadElement
+- [x] noPrecedingSpreadElement
 - [ ] noDestructureAssignmentExpression
 - [x] noExportAssignmentLet
 - [ ] noExportLetAlias

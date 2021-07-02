@@ -13,7 +13,7 @@ export const noNull = makeRule<[], "nullViolation">({
 		},
 		fixable: "code",
 		messages: {
-			nullViolation: "Don't use null. Use undefined instead",
+			nullViolation: "Do not use null. Use undefined instead",
 		},
 		schema: [],
 	},

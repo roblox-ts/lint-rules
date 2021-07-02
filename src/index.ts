@@ -69,10 +69,12 @@ export = makePlugin({
 					"no-private-identifier": "error",
 					"no-spread-destructuring": "error",
 					"no-export-assignment-let": "error",
+					"no-preceding-spread-element": "error",
 					module: "error",
 
 					"misleading-luatuple-checks": "warn",
 					"lua-truthiness": "warn",
+					"no-array-pairs": "warn",
 				}),
 				"no-debugger": "error",
 				"no-labels": "error",
