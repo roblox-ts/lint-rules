@@ -22,10 +22,7 @@ export const noAny = makeRule<[], "anyViolation">({
 	},
 	defaultOptions: [],
 	create(context) {
-		const service = getParserServices(context);
-		const checker = service.program.getTypeChecker();
-
-		function validateNotAnyType(esNode: TSESTree.Expression, tsNode: ts.Expression) {
+		function validateNotAnyType(checker: ts.TypeChecker, esNode: TSESTree.Expression, tsNode: ts.Expression) {
 			if (ts.isSpreadElement(tsNode)) {
 				tsNode = skipDownwards(tsNode.expression);
 			}
@@ -50,35 +47,47 @@ export const noAny = makeRule<[], "anyViolation">({
 
 		return {
 			BinaryExpression(esNode) {
+				const service = getParserServices(context);
+				const checker = service.program.getTypeChecker();
 				const tsNode = service.esTreeNodeToTSNodeMap.get(esNode);
-				validateNotAnyType(esNode.left, tsNode.left);
-				validateNotAnyType(esNode.right, tsNode.right);
+				validateNotAnyType(checker, esNode.left, tsNode.left);
+				validateNotAnyType(checker, esNode.right, tsNode.right);
 			},
 
 			UnaryExpression(esNode) {
+				const service = getParserServices(context);
+				const checker = service.program.getTypeChecker();
 				const tsNode = service.esTreeNodeToTSNodeMap.get(esNode);
 				if (ts.isPrefixUnaryExpression(tsNode) || ts.isPostfixUnaryExpression(tsNode)) {
-					validateNotAnyType(esNode.argument, tsNode.operand);
+					validateNotAnyType(checker, esNode.argument, tsNode.operand);
 				}
 			},
 
 			CallExpression(esNode) {
-				validateNotAnyType(esNode.callee, service.esTreeNodeToTSNodeMap.get(esNode).expression);
+				const service = getParserServices(context);
+				const checker = service.program.getTypeChecker();
+				validateNotAnyType(checker, esNode.callee, service.esTreeNodeToTSNodeMap.get(esNode).expression);
 			},
 
 			NewExpression(esNode) {
-				validateNotAnyType(esNode.callee, service.esTreeNodeToTSNodeMap.get(esNode).expression);
+				const service = getParserServices(context);
+				const checker = service.program.getTypeChecker();
+				validateNotAnyType(checker, esNode.callee, service.esTreeNodeToTSNodeMap.get(esNode).expression);
 			},
 
 			SpreadElement(esNode) {
-				validateNotAnyType(esNode.argument, service.esTreeNodeToTSNodeMap.get(esNode).expression);
+				const service = getParserServices(context);
+				const checker = service.program.getTypeChecker();
+				validateNotAnyType(checker, esNode.argument, service.esTreeNodeToTSNodeMap.get(esNode).expression);
 			},
 
 			MemberExpression(esNode) {
+				const service = getParserServices(context);
+				const checker = service.program.getTypeChecker();
 				const tsNode = service.esTreeNodeToTSNodeMap.get(esNode);
-				validateNotAnyType(esNode.object, tsNode.expression);
+				validateNotAnyType(checker, esNode.object, tsNode.expression);
 				if (ts.isElementAccessExpression(tsNode)) {
-					validateNotAnyType(esNode.property, tsNode.argumentExpression);
+					validateNotAnyType(checker, esNode.property, tsNode.argumentExpression);
 				}
 			},
 		};

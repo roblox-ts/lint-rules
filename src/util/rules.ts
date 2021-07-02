@@ -28,14 +28,12 @@ export type ExpressionWithTest =
 	| TSESTree.IfStatement
 	| TSESTree.WhileStatement;
 
-export type RequiredParserServices = { [K in keyof ParserServices]: Exclude<ParserServices[K], undefined> };
-
 /**
  * Try to retrieve typescript parser service from context.
  */
 export function getParserServices<TMessageIds extends string, TOptions extends Array<unknown>>(
 	context: TSESLint.RuleContext<TMessageIds, TOptions>,
-): RequiredParserServices {
+): Required<ParserServices> {
 	const { parserServices } = context;
 	if (!parserServices || !parserServices.program || !parserServices.esTreeNodeToTSNodeMap) {
 		/**
@@ -46,7 +44,7 @@ export function getParserServices<TMessageIds extends string, TOptions extends A
 			'You have used a rule which requires parserServices to be generated. You must therefore provide a value for the "parserOptions.project" property for @typescript-eslint/parser.',
 		);
 	}
-	return parserServices as RequiredParserServices;
+	return parserServices as Required<ParserServices>;
 }
 
 /**
@@ -57,6 +55,6 @@ export function getConstrainedTypeAtLocation(checker: ts.TypeChecker, node: ts.N
 	return checker.getBaseConstraintOfType(nodeType) || nodeType;
 }
 
-export function getConstrainedType(service: RequiredParserServices, checker: ts.TypeChecker, node: TSESTree.Node) {
+export function getConstrainedType(service: Required<ParserServices>, checker: ts.TypeChecker, node: TSESTree.Node) {
 	return getConstrainedTypeAtLocation(checker, service.esTreeNodeToTSNodeMap.get(node));
 }

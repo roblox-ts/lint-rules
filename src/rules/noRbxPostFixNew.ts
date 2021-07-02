@@ -26,7 +26,7 @@ export const noRbxPostFixNew = makeRule<[], ViolationType>({
 		},
 		fixable: "code",
 		messages: {
-			newViolation: "Don't use `.new` use `new X()` instead.",
+			newViolation: "Do not use `.new` use `new X()` instead.",
 		},
 		schema: [],
 	},
